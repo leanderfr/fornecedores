@@ -156,7 +156,6 @@
 <script setup>
 import { slidingMessage, forceHideToolTip , divStillVisible, scrollUntilElementVisible, improveTooltipLook } from '../assets/js/utils.js'
 import { onMounted, ref, watch  } from 'vue';
-import CarForm from './CarForm.vue';
 import ExpressionForm from './ExpressionForm.vue';
 
 const emit = defineEmits( ['showLoading', 'hideLoading','setDatatableToDisplay','toDisplayAbout', 'toRefreshtopMenu'] );
@@ -193,19 +192,19 @@ if (props.currentViewedDatatable === 'usuarios')   {
 columns.push( {name: 'actions', width: '150px', title: '', id: 3} )
 
 
-// id of the current car being edited or viewed
+// id do registro que sera editado/visualizado
 const currentId = ref(null)
 
-// method being used with the booking form
+// metodo que sera chamado no formulario do registro (get, patch)
 const formHttpMethodApply = ref(null)
 
-// which type of status should be viewed at the moment, active or inactive
+// tipo de registro que deve ser buscado (ativo, inativo, todos)
 const currentStatus = ref('all')  
 
-// if must show the 'Press Enter to search' message underneath the search box
+// mostrar a frase 'Enter= pesquisar' quando foco esta na search box
 const showTipSearchbox = ref(false)
 
-// controls if the searchbox filter was applied
+// tem filtro aplicado no exato momento?
 const filterApplied = ref(false)  
 
 
@@ -227,7 +226,7 @@ const rowClicked = (id) =>   {
 }
 
 //*****************************************************************************
-// if users hovers mouse over search box, put the focus in it 
+// se usuario passar mouse sobre a search box, coloca foco nela
 //*****************************************************************************
 const focusSearchBox = (e) => {
   if (! $(e.target).is(':focus') ) $(e.target).focus()
@@ -235,23 +234,23 @@ const focusSearchBox = (e) => {
 
 //*****************************************************************************
 //*****************************************************************************
-onMounted( () => {
-    
+onMounted( () => {    
   improveTooltipLook()
+
+console.log('datatable')
 
   fetchData()
 })
 
 
 //***************************************************************************
-// if user changes current status, refresh table base on the last choice
+// se usuario aplicou filtro, recarrega tabela
 //*************************************************************************** 
 watch([currentStatus, filterApplied], () => { 
   fetchData()
   },
   { immediate: false }
 )
-
 
 
 //***************************************************************************
@@ -261,21 +260,16 @@ async function fetchData() {
 
   $('#rowsContainer').height('0')
 
-  // in the case of expressions being fetched, once the json parameter is sent,   
-  // no matter the country parameter, backend will return expressions from USA/Brazil
+  // se a search box foi preenchida, leva em consideracao na busca
+  // qual campo sera pesquisado, quem define é o backend
+  // se search box especificada, ignora filtro ativo/inativo
 
-  // if user fullfilled searchbox, consider it
-  // what field will be searched in the backend depends on the table, the backend decides
-  // if a text is specified to search for, the status will be ignored in the backend
+alert(props.currentViewedDatatable)
+
+  let route = `${props.backendUrl}/${props.currentViewedDatatable}/${currentStatus.value}` 
 
   let stringSearch = $.trim( $('#txtTableSearchText').val() )
-  let route
-  if ( props.currentViewedDatatable === 'expressions')   
-    route = `${props.backendUrl}/expressions/json/__no_matter__/${currentStatus.value}` 
-
-  else 
-    route = `${props.backendUrl}/${props.currentViewedDatatable}/${currentStatus.value}`  
-
+  // concatena eventual search box
   route += (stringSearch!='' ? `/${stringSearch}` : '')
 
   filterApplied.value = stringSearch!='' ? true : false ;
@@ -291,11 +285,13 @@ async function fetchData() {
     emit('hideLoading')
     records.value = data;        
 
-    // strecth the div containing the records to the maximum
+    // aumenta a div que contem a datatable, desisto de tentar fazer isso com tailwind/flex, nao tenho mais tempo
     setTimeout(() => {
         if( divStillVisible('#rowsContainer') ) {
           while ( divStillVisible('#rowsContainer') ) { $('#rowsContainer').height( $('#rowsContainer').height()+5 );     }
         }        
+
+        // se ha um registro recem inserido/alterado , rola a datatable ate exibid lo
         let lastRowUpdated = 'tr_'+currentId.value
         // highlight the last updated row
         setTimeout(() => {
@@ -316,7 +312,7 @@ async function fetchData() {
 }
 
 //***************************************************************************
-// user click in a given record to edit or ask to add new record (id='')
+// usuario clicou em determinado registro para editar ou pediu para add um reg
 //*************************************************************************** 
 const editForm = (id='') => {
   currentId.value = id;
@@ -324,18 +320,14 @@ const editForm = (id='') => {
   if (id=='') formHttpMethodApply.value = 'POST'  // add record
   else formHttpMethodApply.value = 'PATCH'  // update record
 
-  if (props.currentViewedDatatable === 'cars')   { 
-    showCarForm.value = true
-  }
-
-  if (props.currentViewedDatatable === 'expressions')   {  
+  if (props.currentViewedDatatable === 'fornecedores')   {  
     exibirFormFornecedor.value = true
   }
 
 }
 
 //***************************************************************************
-// user click in a given record to change its status (active/inactive)
+// usuario pediu para alterar status de um registro
 //*************************************************************************** 
 async function changeStatus (id) {
 
@@ -352,10 +344,8 @@ async function changeStatus (id) {
     return response.text()
   })
   .then((data) => {
-    slidingMessage(props.expressions.status_changed, 3000)         
+    slidingMessage('Status alterado', 3000)         
     fetchData()
-    // ask App.vue to refresh cars list, once one record's been activate/deactivated
-    emit('toRefreshtopMenu') 
   })
   .catch((error) => {
     emit('hideLoading')
@@ -365,7 +355,7 @@ async function changeStatus (id) {
 
 
 //***************************************************************************
-// user click in a given record to delete
+// usuario pediu para excluir registro
 //*************************************************************************** 
 const deleteRecord = (id) => {
 

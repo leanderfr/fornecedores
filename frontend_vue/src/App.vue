@@ -7,7 +7,7 @@
 
       <div class='headerBar'>
 
-        <div id='headerLogo' ></div>
+        <div id='headerLogo' >{{currentViewedDatatable}}</div>
 
         <div class='headerText' >
             <div>Avaliação PHP / Laravel</div>
@@ -17,7 +17,7 @@
         <div class="headerRight">    
 
           <div :class="! backendChanged ? 'backendClicked' : 'backendUnclicked' "   id='backendPHP'  @click="backendChanged = false"  >         
-            <img src="./assets/images/php.svg" alt='' />
+            <img src="./assets/images/php.svg" alt='' class='iconeBackend'  />
           </div>
 
           <label for="chkBackendSelector" class="switch_backend"  >
@@ -26,7 +26,7 @@
           </label>
 
           <div :class="backendChanged ? 'backendClicked' : 'backendUnclicked' "   id='backendLaravel'  @click="backendChanged = true"  >         
-            <img src="./assets/images/laravel.svg" alt='' />
+            <img src="./assets/images/laravel.png" alt='' class='iconeBackend' />
           </div>
 
         </div>
@@ -34,11 +34,12 @@
       </div>
 
       <!-- menu superior -->
-      <div class='menuSuperior' id='menuSuperior' style='scrollbar-width: thin;' @wheel='toWheelMenu'>
-        <MenuSuperior 
-          :selectedItem='selectedMenu' 
-          :backendUrl='backendUrl'    
-          @setNewselectedMenu='setNewselectedMenu'            /> 
+      <div class='Menu' id='Menu' style='scrollbar-width: thin;' @wheel='toWheelMenu'>
+        <Menu 
+          :selectedMenuItem='selectedMenuItem' 
+          :menuItens='menuItens'    
+          @hideLoading="isLoading=false"     
+          @setMenuItem='setMenuItem'            />  
       </div>
 
 
@@ -111,7 +112,7 @@
 <!-- composition API , way cleaner then options API -->
 <script setup>
   import { ref, onMounted, watch, onBeforeMount  } from 'vue';
-  import MenuSuperior from './MenuSuperior.vue';
+  import Menu from './Menu.vue';
   import Datatable from './components/Datatable.vue';
 
   // alguns efeitos jquery 
@@ -133,7 +134,7 @@
   const backendUrl = ref('http://localhost')  
 
   // opcao do menu atual
-  const selectedMenu = ref(0)
+  const selectedMenuItem = ref(0)
 
   // qual tabela deve ser exibida no momento
   const currentViewedDatatable = ref('')
@@ -144,6 +145,10 @@
   // se é hora de exibir uma tabela
   const toDisplayDatatable = ref(false)
 
+  // itens do menu
+  const menuItens = ref([])
+
+
 
 
 
@@ -151,8 +156,8 @@
   //***************************************************************************
   // usuario escolheu opcao no menu (top)
   //***************************************************************************
-  const setNewselectedMenu = (itemMenu) => {
-    selectedMenu.value = itemMenu
+  const setMenuItem = (itemMenu) => {
+    selectedMenuItem.value = itemMenu
   }
 
   //***************************************************************************
@@ -186,6 +191,11 @@
  
       preparePuppyIcon()
       prepareLoadingAnimation()
+
+      let menuItens = [
+        {id: 1, titulo: 'Fornecedores', icone: 'fornecedores.svg'},
+        {id: 2, titulo: 'Usuários', icone: 'usuarios.svg'}
+      ]
 
       isLoading.value = true
 
