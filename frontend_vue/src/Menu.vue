@@ -4,19 +4,17 @@
   <div class='topMenu' id='topMenu' > 
 
     <!-- itens do menu -->
-    <template v-if='menuItens.length!=0' >
-        <div v-for='item in menuItens' :id="'itemMenu' + item.id" class='itemMenu' :class='{itemMenuSelected: props.selectedMenuItem==item.id}'  :key='item.id' 
-            :style="{ 
-              backgroundImage: `url('./assets/images/${item.icone}.png')` ,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '140px 90px',
-              backgroundPositionY: 'center'
+    <div v-for='item in props.menuItens' :id="'itemMenu' + item.id" class='itemMenu' :class='{itemMenuSelected: props.selectedMenuItem==item.id}'  :key='item.id' 
+        :style="{ 
+          backgroundImage: `url(src/assets/images/${item.icone}`,   
+          backgroundRepeat: 'no-repeat',
+          backgroundPositionY: 'center'  ,
+          backgroundPositionX: '10%',
 
-            }" 
-            @click="emit('setMenuItem', item.id)"   >
-            <span>{{item.titulo}}</span>
-        </div>
-      </template>
+        }"
+        @click="emit('setMenuItem', item.id)"   >
+        <span>{{item.titulo}}</span>
+    </div>
 
     </div>
 
@@ -35,7 +33,10 @@ const emit = defineEmits(['setMenuItem', 'hideLoading']);
 //*****************************************************************************
 onMounted( () => {
 console.log('cheou')
-emit('hideLoading')
+setTimeout(() => {
+emit('hideLoading')  
+}, 1000);
+
 console.log('cheou222')
 
 })

@@ -7,7 +7,7 @@
 
       <div class='headerBar'>
 
-        <div id='headerLogo' >{{currentViewedDatatable}}</div>
+        <div id='headerLogo' ></div>
 
         <div class='headerText' >
             <div>Avaliação PHP / Laravel</div>
@@ -16,17 +16,17 @@
         <!-- seletor de backend  -->
         <div class="headerRight">    
 
-          <div :class="! backendChanged ? 'backendClicked' : 'backendUnclicked' "   id='backendPHP'  @click="backendChanged = false"  >         
-            <img src="./assets/images/php.svg" alt='' class='iconeBackend'  />
+          <div :class="[ 'iconeBackend', ! isLaravelSelected ? 'backendClicked' : 'backendUnclicked' ]"   id='backendPHP'  @click="isLaravelSelected = false"  >         
+            <img src="./assets/images/php.svg" alt='' style='width:50px'  />
           </div>
 
           <label for="chkBackendSelector" class="switch_backend"  >
-            <input id="chkBackendSelector" type="checkbox"  v-model="backendChanged"    />
+            <input id="chkBackendSelector" type="checkbox"  v-model="isLaravelSelected"    />
             <span class="slider_backend round"></span>
           </label>
 
-          <div :class="backendChanged ? 'backendClicked' : 'backendUnclicked' "   id='backendLaravel'  @click="backendChanged = true"  >         
-            <img src="./assets/images/laravel.png" alt='' class='iconeBackend' />
+          <div :class="[ 'iconeBackend', isLaravelSelected ? 'backendClicked' : 'backendUnclicked' ]"   id='backendLaravel'  @click="isLaravelSelected = true"  >         
+            <img src="./assets/images/laravel.png" alt='' style='width:40px;height:40px' />
           </div>
 
         </div>
@@ -50,16 +50,18 @@
           <!-- mostra datatable se usuario pediu para ver alguma tabela  -->
           <div v-if='toDisplayDatatable'>
 
+<!--
             <Datatable  
                 :key='toRefreshDatatable'
                 :currentViewedDatatable = currentViewedDatatable
                 :setDatatableToDisplay='setDatatableToDisplay' 
                 :expressions='expressions' 
-                :currentBackend="backendChanged ? 'usa' : 'brazil'" 
+                :currentBackend="isLaravelSelected ? 'usa' : 'brazil'" 
                 :backendUrl='backendUrl'    
                 @showLoading="isLoading=true" 
                 @hideLoading="isLoading=false"     
                 @setDatatableToDisplay='setDatatableToDisplay'  />
+-->
           </div>
 
 
@@ -125,7 +127,7 @@
 
   const toRefreshDatatable = ref(0)  
 
-  const backendChanged = ref(true)
+  const isLaravelSelected = ref(true)
   const isLoading = ref(true)
   const error = ref(null)
 
@@ -192,7 +194,7 @@
       preparePuppyIcon()
       prepareLoadingAnimation()
 
-      let menuItens = [
+      menuItens.value = [
         {id: 1, titulo: 'Fornecedores', icone: 'fornecedores.svg'},
         {id: 2, titulo: 'Usuários', icone: 'usuarios.svg'}
       ]
@@ -205,15 +207,11 @@
   // se usuario alterar backend atual, força atualizacao da datatable atual
   // isso se alguma datatable estiver sendo exibida, claro
   //*************************************************************************** 
-  watch([backendChanged], () => { 
+  watch([isLaravelSelected], () => { 
       isLoading.value = true;
 
-      Promise.all( [fetchExpressions()] ).then(() => {
-        isLoading.value = false
-        // componentes afetados
-        toRefreshDatatable.value++
-        toRefreshSchedule.value++
-      })        
+      // componentes afetados
+      toRefreshDatatable.value++
     },
     { immediate: false }
   )

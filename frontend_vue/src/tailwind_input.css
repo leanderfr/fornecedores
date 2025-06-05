@@ -25,7 +25,7 @@ though this was thought to be a tailwind file, I use some moments vanilla css to
 #headerLogo {
   background-image: url("./assets/images/logo-revendamais.png");
   background-repeat: no-repeat;
-  background-size: 60px 60px;
+  background-size: 120px 20px;
   display: flex;
   flex-basis: 33%;
   height: 100%;
@@ -56,6 +56,7 @@ padding-right: 10px;
 
 .backendUnclicked {
   background-color: transparent;
+
   border-radius: 5px;
   cursor: pointer;
   width: 70px;
@@ -76,7 +77,7 @@ input type='checkbox' customizado para parecer um seletor on/off, usado na selec
     width: 60px;
     height: 30px;
     margin-left: 5px;
-    margin-top: 1px;
+    margin-top: 10px;
 }
 
 .switch_backend input {
@@ -215,12 +216,12 @@ align-items: center;
 }
 
 .topMenu {
-  @apply flex flex-row   grow h-full items-center pl-2
+  @apply flex flex-row grow items-center pl-2 h-[80px] bg-[#E6F0FF]
 }
 
 .itemMenu {
-  @apply bg-[#E6F0FF] hover:border-gray-700 hover:border-[3px] cursor-pointer justify-center pr-2
-      border-transparent border-[3px] flex flex-col h-full w-[230px] pl-2 text-right text-gray-500
+  @apply bg-[#E6F0FF] hover:border-gray-700 hover:border-[3px] cursor-pointer justify-center pl-[10%]
+      border-transparent border-[3px] flex flex-col h-full w-[230px]   text-gray-500
 }
 .itemMenuSelected { 
   @apply border-[navy] border-[3px]
@@ -255,7 +256,6 @@ div._doggy {
   background: url('./assets/images/_dog.png') no-repeat top left;
 }
 
-
 div._doggy_1 {
   bottom: 1px;
   display: none;
@@ -263,7 +263,7 @@ div._doggy_1 {
   z-index: 2000;
   position: fixed;
   width: 16px;
-  height: 16px;
+  height: 16px; 
   float: right;
   background: url('./assets/images/thought_1.png') no-repeat top left;
 }
@@ -553,6 +553,5 @@ display:flex;
 }
 
 .iconeBackend {
-width: 40px;
-height: 40px;
+@apply flex flex-col justify-center items-center  ;
 }
