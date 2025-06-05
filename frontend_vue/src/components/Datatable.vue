@@ -1,40 +1,23 @@
 
 <template>
 
-    <div>   <!-- required (by Vue) fragment -->
+    <div>    <!-- exigencia do Vue, tudo agrupado em 1 elemento -->
 
 
     <div class='flex flex-col h-full ' id='datatableContainer'>
 
-      <!-- top tool bar -->
-      <div class="flex flex-row h-[60px] w-full justify-between border-b-2 " id='datatableToolbar'>
+      <!-- titulo da tabela, sobra espaço canto direito caso precise adicionar opcoes  -->
+      <div class="flex flex-row h-[60px] w-full justify-between border-b-2 " >
 
-
-          <div></div>
-
-          <!-- navigation buttons -->
           <div class="flex flex-row pt-1 w-full justify-between">
               <div class='pl-4 pt-2 text-2xl'> {{ title }} </div>
-
-              <div class='flex flex-row'>
-                  <!-- schedule icon  -->
-                  <div  class='btnSCHEDULE_TABLE putPrettierTooltip' :title="expressions.schedule" @click="forceHideToolTip();emit('toDisplayAbout')" aria-hidden="true"></div>   
-
-                  <!-- cars table icon -->
-                  <div  class='btnCARS_TABLE putPrettierTooltip' 
-                    :title="expressions.cars" 
-                    @click="forceHideToolTip();emit('setDatatableToDisplay', 'cars')" 
-                    aria-hidden="true"></div>   
-
-
-                  <!-- expressions table icon -->
-                  <div  class='btnEXPRESSIONS_TABLE putPrettierTooltip' :title="expressions.expressions" @click="forceHideToolTip();emit('setDatatableToDisplay', 'expressions')" aria-hidden="true"></div>   
-                </div>
           </div> 
 
       </div>
 
-      <div class='datatableTitle' >
+
+      <!-- botoes de acao da tabela (somente regs ativos, inativos, novo reg, etc)  -->
+      <div class='datatableToolbar' >
         <div class='flex flex-row'>
 
             <!--  search box --> 
@@ -52,11 +35,11 @@
                   <div v-else>&nbsp;</div> 
               </div>
 
-              <!-- hidden button that triggers the search when the user press Enter -->
+              <!-- botao escondido que é acionado quando usuario pressiona Enter na search box -->
               <button id='triggerSearchBox' v-show="false" @click='fetchData()'></button>
             </div>
 
-            <!-- button to reset filter --> 
+            <!-- reset do filtro --> 
             <div id='btnResetTextTableFilter'  class='putPrettierTooltip' :title="expressions.reset_filter"
                 :class="filterApplied ? 'btnTABLE_CANCEL_FILTER_ACTIVE' : 'btnTABLE_CANCEL_FILTER_INACTIVE'"
                 @click="forceHideToolTip();clearFilter()"  aria-hidden="true">
@@ -65,10 +48,10 @@
         </div>
 
         <div className=' flex flex-col'>
-            <!-- action buttons -->
+            <!-- botoes de acao -->
             <div class=' flex flex-row items-start  h-full gap-5 pt-3 '>
 
-              <!-- show/hide active records -->
+              <!-- exibe/esconde registros ativos -->
               <div v-if="currentStatus=='active'" class='btnTABLE_ONLY_ACTIVE_RECORDS_ON putPrettierTooltip' 
                       :title="expressions.only_active" 
                       @click="forceHideToolTip();currentStatus=''" 
@@ -79,7 +62,7 @@
                     @click="forceHideToolTip();currentStatus='active'" 
                     aria-hidden="true"></div>   
 
-              <!-- show/hide inactive records -->
+              <!-- exibe/esconde registros inativos -->
               <div v-if="currentStatus=='inactive'" class='btnTABLE_ONLY_INACTIVE_RECORDS_ON putPrettierTooltip' 
                     :title="expressions.only_inactive" 
                     @click="forceHideToolTip();currentStatus=''" 
@@ -90,33 +73,33 @@
                       @click="forceHideToolTip();currentStatus='inactive'" 
                   aria-hidden="true"></div>   
 
-              <!-- new record -->
-              <div  class='btnTABLE_NEW_RECORD putPrettierTooltip' :title="expressions.add_record" @click="editForm();" aria-hidden="true"></div>   
+              <!-- novo registro -->
+              <div  class='btnTABLE_NOVO_REGISTRO putPrettierTooltip' :title="expressions.add_record" @click="editForm();" aria-hidden="true"></div>   
             </div>
 
-            <!-- legend -->
+            <!-- legenda -->
             <div :style="{paddingRight: '10px', fontSize: '12px', display:'flex', flexDirection: 'row', justifyContent: 'flex-end'}"  >
-                <div :style="{paddingTop: '10px'}">{ props.expressions.legend } : <span :style="{backgroundColor: 'red'}">&nbsp;&nbsp;&nbsp;</span>= {props.expressions.inactive }</div>
+                <div :style="{paddingTop: '10px'}">Legenda: <span :style="{backgroundColor: 'red'}">&nbsp;&nbsp;&nbsp;</span>= inativos</div>
             </div>
 
          </div>
 
       </div>
 
-      <!-- loop to display each column -->
+      <!-- exibe titulos colunas -->
       <div class="datatableHeader" > 
             <div v-for='column in columns' :key="column" :style="{width: column.width, paddingLeft: '5px'}">{{ column.title }}</div> 
       </div>          
 
-      <!-- display records from the current table -->
+      <!-- lista registros  -->
       <template v-if='records'>
         <div id='rowsContainer'>
           <div  class="DatatableRows" v-for='record in records' :key="record"  @click="rowClicked('tr_'+record.id)" :id="'tr_'+record.id"> 
 
-              <!-- if the record status= true (activate), row will be normal color, otherwise (inactive), color will be red -->
+              <!-- se o status= ativo, imprime em preto, se nao, vermelho -->
               <div :class="record.active ? 'DatatableRow' : 'DatatableRowInactiveRecord'"   >         
 
-                <!-- loop through the columns -->
+                <!-- imprime cada coluna -->
                 <template v-for='(column, index) in columns'   >         
 
                   <div v-if='index < (columns.length-1)'  
@@ -127,15 +110,15 @@
                     {{ record[column.fieldname] }} >
                   </div>
 
-                  <!-- if the last column was printed and the current record is active, now put the 3 action icons (edit, delete and change status) -->
-                  <div v-if='index === columns.length-1 && record.active==1' class='actionColumn' :style="{width: column.width}" :key="'1tr-'+index" >
+                  <!-- se a ultima coluna foi impressa e reg ativo, adiciona 3 icones de acao (editar, excluir, desativar ) -->
+                  <div v-if='index === columns.length-1 && record.active==1' class='actionColumn' :style="{width: column.width}" :key="'tr-'+index" >
                       <div class='actionIcon' @click='editForm(record.id)' ><img alt=''  src='../assets/images/edit.svg' /></div>
                       <div class='actionIcon'  @click='deleteRecord'><img alt=''   src='../assets/images/delete.svg' /></div>
                       <div class='actionIcon' @click='changeStatus(record.id)'><img alt=''  src='../assets/images/active.svg' /></div>
                   </div>   
 
-                  <!-- if the last column was printed and the current record is inactive, put only the icon to reactivate -->
-                  <div v-if='index === columns.length-1 && record.active==0' class='actionColumn' :style="{width: column.width}" :key="'1tr-'+index"  >
+                  <!-- se a ultima coluna foi impressa e reg inativo, adiciona icones (re)ativar -->
+                  <div v-if='index === columns.length-1 && record.active==0' class='actionColumn' :style="{width: column.width}" :key="'tr-'+index"  >
                       <div class='actionIconNull'>&nbsp;</div>
                       <div class='actionIconNull'>&nbsp;</div>
                       <div class='actionIcon' @click='changeStatus(record.id)'><img alt=''   src='../assets/images/inactive.svg' /></div>
@@ -150,27 +133,14 @@
   </div>
 
 
-  <div v-if="showCarForm" id='backDrop' class='w-full h-full  absolute flex items-center justify-center left-0 top-0 z-10 bg-[rgba(0,0,0,0.5)]' @click.self='showCarForm=false' aria-hidden="true"  >  
-    <CarForm 
-        :expressions='expressions' 
-        :backendUrl='props.backendUrl' 
-        :currentId='currentId'
-        :imagesUrl='props.imagesUrl'
-        :formHttpMethodApply = 'formHttpMethodApply'  
-        @closeCarForm="showCarForm=false"  
-        @showLoading="emit('showLoading')" 
-        @hideLoading="emit('hideLoading')" 
-        @refreshDatatable = "fetchData();emit('toRefreshCarsBrowser');"   />
-  </div>
-
-
-  <div v-if="showExpressionForm" id='backDrop' class='w-full h-full  absolute flex items-center justify-center left-0 top-0 z-10 bg-[rgba(0,0,0,0.5)]' @click.self='showExpressionForm=false' aria-hidden="true"  >  
+  <!-- usuario pediu para editar/inserir fornecedor -->  
+  <div v-if="exibirFormFornecedor" id='backDrop' class='w-full h-full  absolute flex items-center justify-center left-0 top-0 z-10 bg-[rgba(0,0,0,0.5)]' @click.self='exibirFormFornecedor=false' aria-hidden="true"  >  
     <ExpressionForm 
         :expressions='expressions' 
         :backendUrl='props.backendUrl' 
         :currentId='currentId'
         :formHttpMethodApply = 'formHttpMethodApply'  
-        @closeExpressionForm="showExpressionForm=false"  
+        @closeExpressionForm="exibirFormFornecedor=false"  
         @showLoading="emit('showLoading')" 
         @hideLoading="emit('hideLoading')"  juca
         @refreshDatatable = "fetchData();emit('toRefreshExpressions');"   />
@@ -189,37 +159,33 @@ import { onMounted, ref, watch  } from 'vue';
 import CarForm from './CarForm.vue';
 import ExpressionForm from './ExpressionForm.vue';
 
-const emit = defineEmits( ['showLoading', 'hideLoading','setDatatableToDisplay','toDisplayAbout', 'toRefreshCarsBrowser'] );
+const emit = defineEmits( ['showLoading', 'hideLoading','setDatatableToDisplay','toDisplayAbout', 'toRefreshtopMenu'] );
 const props = defineProps( ['currentViewedDatatable', 'currentBackend', 'backendUrl', 'imagesUrl', 'expressions' ] )
 
-// records that are gonna be showed in the datatable
+// registros que serao listados
 const records = ref(null)  
 
-// controls if the car form need to be opened
-const showCarForm = ref(false)  
+// formulario de fornecedor deve ser mostrado?
+const exibirFormFornecedor = ref(false)
 
-// controls if the expression form need to be opened
-const showExpressionForm = ref(false)
-
-// colunas que serao exibidias dependendo da tabela sendo vista (_currentMenuItem)
+// colunas que serao exibidias dependendo da tabela sendo vista 
 let columns = []
 
-// car's datatable
 let title = ''
 
-if (props.currentViewedDatatable === 'cars')   {
+// se usuario pediu ver tabela fornecedores
+if (props.currentViewedDatatable === 'fornecedores')   {
   columns.push({ fieldname: "id", width: "5%", title: 'Id', id: 'col1', boolean: false },
-              { fieldname: "description", width: "calc(75% - 150px)", title: props.expressions.description, id: 'col2', boolean: false},
-              { fieldname: "plate", width: "20%", title: props.expressions.plate, id: 'col2', boolean: false} )
-  title = props.expressions.cars_table
+              { fieldname: "nome", width: "calc(75% - 150px)", title: 'Nome', id: 'col2', boolean: false},
+              { fieldname: "cpnj", width: "20%", title: 'CNPJ', id: 'col3', boolean: false} )
+  title = 'Fornecedores'
 }
 
-if (props.currentViewedDatatable === 'expressions')   {
+if (props.currentViewedDatatable === 'usuarios')   {
   columns.push({ fieldname: "id", width: "5%", title: 'Id', id: 'col1', boolean: false },
-              { fieldname: "item", width: "calc(25% - 150px)", title: props.expressions.item, id: 'col2', boolean: false},
-              { fieldname: "english", width: "35%", title: props.expressions.field_english, id: 'col3', boolean: false},
-              { fieldname: "portuguese", width: "35%", title: props.expressions.field_portuguese, id: 'col4', boolean: false} )
-  title = props.expressions.expressions_table
+              { fieldname: "nome", width: "calc(25% - 150px)", title: 'Nome', id: 'col2', boolean: false},
+              { fieldname: "is_admin", width: "35%", title: 'Administrador', id: 'col3', boolean: true} )
+  title = 'Usuários'
 }
 
 
@@ -363,7 +329,7 @@ const editForm = (id='') => {
   }
 
   if (props.currentViewedDatatable === 'expressions')   {  
-    showExpressionForm.value = true
+    exibirFormFornecedor.value = true
   }
 
 }
@@ -389,7 +355,7 @@ async function changeStatus (id) {
     slidingMessage(props.expressions.status_changed, 3000)         
     fetchData()
     // ask App.vue to refresh cars list, once one record's been activate/deactivated
-    emit('toRefreshCarsBrowser') 
+    emit('toRefreshtopMenu') 
   })
   .catch((error) => {
     emit('hideLoading')

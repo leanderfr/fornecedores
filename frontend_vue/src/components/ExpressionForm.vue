@@ -72,9 +72,9 @@
 
     <!-- botoes salvar/sair -->
     <div class="flex flex-row w-full justify-between px-6 border-t-[1px] border-t-gray-300 py-2">
-      <button  id="btnCLOSE" class="btnCANCEL" @click="emit('closeExpressionForm')" >{{ expressions.button_cancel }}</button>
+      <button  id="btnCLOSE" class="btnCANCELAR" @click="emit('closeExpressionForm')" >{{ expressions.button_cancel }}</button>
 
-      <button  id="btnSAVE" class="btnSAVE" @click="saveExpression()" aria-hidden="true">{{ expressions.button_save }}</button>
+      <button  id="btnSALVAR" class="btnSALVAR" @click="saveExpression()" aria-hidden="true">{{ expressions.button_save }}</button>
     </div>
 
   </div> 

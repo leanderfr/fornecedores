@@ -596,6 +596,10 @@ video {
   visibility: collapse;
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -685,6 +689,10 @@ video {
   display: inline-block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -731,14 +739,6 @@ video {
 
 .h-\[100px\] {
   height: 100px;
-}
-
-.h-\[1px\] {
-  height: 1px;
-}
-
-.h-\[200px\] {
-  height: 200px;
 }
 
 .h-\[30px\] {
@@ -803,10 +803,6 @@ video {
   width: 1.75rem;
 }
 
-.w-\[13\%\] {
-  width: 13%;
-}
-
 .w-\[130px\] {
   width: 130px;
 }
@@ -819,48 +815,20 @@ video {
   width: 170px;
 }
 
-.w-\[20\%\] {
-  width: 20%;
-}
-
 .w-\[230px\] {
   width: 230px;
-}
-
-.w-\[30\%\] {
-  width: 30%;
 }
 
 .w-\[400px\] {
   width: 400px;
 }
 
-.w-\[69\%\] {
-  width: 69%;
-}
-
-.w-\[70\%\] {
-  width: 70%;
-}
-
 .w-\[70px\] {
   width: 70px;
 }
 
-.w-\[9\%\] {
-  width: 9%;
-}
-
 .w-\[95\%\] {
   width: 95%;
-}
-
-.w-\[calc\(100\%-22px\)\] {
-  width: calc(100% - 22px);
-}
-
-.w-\[calc\(40\%-10px\)\] {
-  width: calc(40% - 10px);
 }
 
 .w-auto {
@@ -1259,64 +1227,12 @@ video {
   background-color: rgb(254 252 232 / var(--tw-bg-opacity, 1));
 }
 
-.bg-icon-all-cars {
-  background-image: url("data:image/svg+xml,<svg width='64px' height='64px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='navy'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Filter_Off'> <path id='Vector' d='M13 4H18.4C18.9601 4 19.2409 4 19.4548 4.10899C19.6429 4.20487 19.7948 4.35774 19.8906 4.5459C19.9996 4.75981 20 5.04005 20 5.6001V6.3448C20 6.58444 20 6.70551 19.9727 6.81942C19.9482 6.92146 19.9072 7.01893 19.8524 7.1084C19.7906 7.20931 19.7043 7.2958 19.5314 7.46875L18 9.00012M7.49961 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7083C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9809 14.1475 12.8915C14.2091 12.7909 14.2952 12.7048 14.4669 12.5331L14.4688 12.5314L15.5001 11.5001M15.5001 11.5001L5 1M15.5001 11.5001L19 15' stroke='navy' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>");
-}
-
-.bg-icon-ask-car {
-  background-image: url("data:image/svg+xml,<svg version='1.0' xmlns='http://www.w3.org/2000/svg'  width='64px' height='64px' viewBox='0 0 200.000000 200.000000'  preserveAspectRatio='xMidYMid meet'>  <g transform='translate(0.000000,200.000000) scale(0.100000,-0.100000)' fill='rgb(0,0,0)' stroke='none'> <path d='M1394 1826 c-49 -22 -74 -61 -74 -118 0 -43 5 -55 33 -83 43 -43 79 -52 131 -34 107 37 114 192 11 235 -42 17 -61 17 -101 0z'/> <path d='M1258 1534 c-27 -12 -59 -46 -127 -134 -50 -66 -95 -122 -100 -125 -5 -3 -58 17 -117 45 -59 27 -117 50 -129 50 -40 0 -69 -53 -47 -87 8 -13 116 -68 239 -122 55 -24 77 -29 91 -22 11 6 57 60 103 120 l84 111 5 -546 5 -546 24 -19 c32 -26 67 -24 96 6 l25 24 0 306 0 305 35 0 35 0 0 -309 0 -310 26 -20 c35 -28 69 -26 99 4 l25 24 0 531 0 530 25 0 25 0 0 -202 c0 -143 4 -210 13 -228 16 -31 61 -39 88 -14 18 16 19 33 19 258 0 213 -3 246 -19 282 -39 85 -102 104 -335 103 -112 0 -161 -4 -188 -15z'/> <path d='M612 531 l-584 -316 80 -3 79 -3 504 272 c277 150 505 274 507 275 2 1 2 22 0 46 l-3 44 -583 -315z'/> <path d='M1752 488 l3 -243 110 0 110 0 3 243 2 242 -115 0 -115 0 2 -242z'/> <path d='M1006 369 l-178 -149 61 0 62 0 125 102 124 103 0 47 c0 27 -3 48 -7 47 -5 0 -88 -67 -187 -150z'/> </g> </svg> ");
-}
-
-.bg-icone-cancelar {
-  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='black' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
-}
-
-.bg-icone-excluir {
-  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='white'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='white' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
-}
-
-.bg-icone-salvar {
-  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 -2 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='white'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>action / 5 - action, check, checkmark, ok icon</title> <g id='Free-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'> <g transform='translate(-452.000000, -85.000000)' id='Group' stroke='white' stroke-width='2'> <g transform='translate(449.000000, 80.000000)' id='Shape'> <polyline points='4 10.5711735 10.2222222 18 20 6'> </polyline> </g> </g> </g> </g></svg>");
-}
-
-.bg-icon-button-upload {
-  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M18.22 20.75H5.78C5.43322 20.7359 5.09262 20.6535 4.77771 20.5075C4.4628 20.3616 4.17975 20.155 3.94476 19.8996C3.70977 19.6442 3.52745 19.3449 3.40824 19.019C3.28903 18.693 3.23525 18.3468 3.25 18V15C3.25 14.8011 3.32902 14.6103 3.46967 14.4697C3.61033 14.329 3.80109 14.25 4 14.25C4.19892 14.25 4.38968 14.329 4.53033 14.4697C4.67099 14.6103 4.75 14.8011 4.75 15V18C4.72419 18.2969 4.81365 18.5924 4.99984 18.8251C5.18602 19.0579 5.45465 19.21 5.75 19.25H18.22C18.5154 19.21 18.784 19.0579 18.9702 18.8251C19.1564 18.5924 19.2458 18.2969 19.22 18V15C19.22 14.8011 19.299 14.6103 19.4397 14.4697C19.5803 14.329 19.7711 14.25 19.97 14.25C20.1689 14.25 20.3597 14.329 20.5003 14.4697C20.641 14.6103 20.72 14.8011 20.72 15V18C20.75 18.6954 20.5041 19.3744 20.0359 19.8894C19.5677 20.4045 18.9151 20.7137 18.22 20.75Z' fill='black'></path> <path d='M16 8.74995C15.9015 8.75042 15.8038 8.7312 15.7128 8.69342C15.6218 8.65564 15.5392 8.60006 15.47 8.52995L12 5.05995L8.53 8.52995C8.38782 8.66243 8.19978 8.73455 8.00548 8.73113C7.81118 8.7277 7.62579 8.64898 7.48838 8.51157C7.35096 8.37416 7.27225 8.18877 7.26882 7.99447C7.2654 7.80017 7.33752 7.61213 7.47 7.46995L11.47 3.46995C11.6106 3.3295 11.8012 3.25061 12 3.25061C12.1987 3.25061 12.3894 3.3295 12.53 3.46995L16.53 7.46995C16.6705 7.61058 16.7493 7.8012 16.7493 7.99995C16.7493 8.1987 16.6705 8.38932 16.53 8.52995C16.4608 8.60006 16.3782 8.65564 16.2872 8.69342C16.1962 8.7312 16.0985 8.75042 16 8.74995Z' fill='black'></path> <path d='M12 15.75C11.8019 15.7474 11.6126 15.6676 11.4725 15.5275C11.3324 15.3874 11.2526 15.1981 11.25 15V4C11.25 3.80109 11.329 3.61032 11.4697 3.46967C11.6103 3.32902 11.8011 3.25 12 3.25C12.1989 3.25 12.3897 3.32902 12.5303 3.46967C12.671 3.61032 12.75 3.80109 12.75 4V15C12.7474 15.1981 12.6676 15.3874 12.5275 15.5275C12.3874 15.6676 12.1981 15.7474 12 15.75Z' fill='black'></path> </g></svg>");
-}
-
-.bg-icon-calendar {
-  background-image: url("data:image/svg+xml,<svg width='64px' height='64px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M22 14V12C22 8.22876 22 6.34315 20.8284 5.17157C19.6569 4 17.7712 4 14 4H10C6.22876 4 4.34315 4 3.17157 5.17157C2 6.34315 2 8.22876 2 12V14C2 17.7712 2 19.6569 3.17157 20.8284C4.34315 22 6.22876 22 10 22H14' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> <path opacity='0.5' d='M7 4V2.5' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> <path opacity='0.5' d='M17 4V2.5' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> <path opacity='0.5' d='M2 9H22' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> <circle cx='18' cy='18' r='3' stroke='#1C274C' stroke-width='1.5'></circle> <path d='M20.5 20.5L22 22' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> </g></svg>");
-}
-
-.bg-icon-car {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' role='img' class='iconify iconify--gis' preserveAspectRatio='xMidYMid meet' fill='black' stroke='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'><path d='M49.368 11.228c-11.646-.171-27.826.079-31.156 9.027l-8.184 19.204a2.85 2.85 0 0 0-1.37-.865l-3.296-.927a2.86 2.86 0 0 0-3.534 1.983l-1.72 6.104a2.86 2.86 0 0 0 1.983 3.535l3.297.927c.11.03.22.04.33.059c-.63 1.569-1.023 3.295-1.023 4.322v22.32c0 1.145.48 1.674 1.243 1.922v5.947a4.008 4.008 0 0 0 4.017 4.017H20.73a4.008 4.008 0 0 0 4.017-4.017v-5.729h50.504v5.729a4.01 4.01 0 0 0 4.018 4.017h10.775a4.01 4.01 0 0 0 4.019-4.017v-5.947c.763-.248 1.24-.777 1.24-1.922v-22.32c0-1.027-.393-2.753-1.022-4.322c.11-.018.22-.028.33-.06l3.297-.926a2.86 2.86 0 0 0 1.982-3.535l-1.717-6.104a2.861 2.861 0 0 0-3.536-1.983l-3.295.927a2.855 2.855 0 0 0-1.37.865l-8.185-19.204c-3.57-9.084-20.773-8.856-32.42-9.027zm33.358 29.444c.194.576-.386.96-.993.995c0 0-1.984.168-4.72.389c-2.082-4.864-6.92-8.292-12.525-8.292c-6.151 0-11.373 4.13-13.048 9.754c-.464.006-1.003.026-1.435.026c-10.596 0-31.738-1.877-31.738-1.877c-.607-.036-1.187-.419-.993-.995c8.142-24.821 8.385-22.955 32.275-22.694c23.891.26 24.03-1.513 33.177 22.694zm-18.238-2.217a8.886 8.886 0 0 1 7.447 3.991c-4.785.356-10.292.719-15.424.93a8.879 8.879 0 0 1 7.977-4.921zM9.407 46.511c.072.106.142.213.221.317h-.31zm5.294 6.234c2.096-.035 13.348 3.753 13.348 3.753c1.405.395 2.642 3.051 2.635 4.511c-.021 4.917-12.71 3.21-17.86 3.23a2.63 2.63 0 0 1-2.635-2.634V55.38c0-1.46 2.416-2.6 4.512-2.635zm70.598 0c2.096.034 4.512 1.175 4.512 2.635v6.225a2.63 2.63 0 0 1-2.635 2.635c-5.15-.02-17.839 1.686-17.86-3.23c-.007-1.46 1.23-4.117 2.635-4.512c0 0 11.252-3.788 13.348-3.753z' fill='black'></path></g></svg>");
-}
-
-.bg-icone-arrastar {
-  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='rgb(0,0,0)'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'><line x1='32' y1='8' x2='32' y2='56'></line><line x1='56' y1='32' x2='8' y2='32'></line><polyline points='40 16 32 8 24 16'></polyline><polyline points='24 48 32 56 40 48'></polyline><polyline points='48 40 56 32 48 24'></polyline><polyline points='16 24 8 32 16 40'></polyline></g></svg>");
-}
-
-.bg-icon-expressions {
-  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 2 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path opacity='0.5' d='M13 7L3 7' stroke='navy' stroke-width='1.5' stroke-linecap='round'></path> <path opacity='0.5' d='M10 12H3' stroke='navy' stroke-width='1.5' stroke-linecap='round'></path> <path opacity='0.5' d='M8 17H3' stroke='navy' stroke-width='1.5' stroke-linecap='round'></path> <path d='M11.3161 16.6922C11.1461 17.07 11.3145 17.514 11.6922 17.6839C12.07 17.8539 12.514 17.6855 12.6839 17.3078L11.3161 16.6922ZM16.5 7L17.1839 6.69223C17.0628 6.42309 16.7951 6.25 16.5 6.25C16.2049 6.25 15.9372 6.42309 15.8161 6.69223L16.5 7ZM20.3161 17.3078C20.486 17.6855 20.93 17.8539 21.3078 17.6839C21.6855 17.514 21.8539 17.07 21.6839 16.6922L20.3161 17.3078ZM19.3636 13.3636L20.0476 13.0559L19.3636 13.3636ZM13.6364 12.6136C13.2222 12.6136 12.8864 12.9494 12.8864 13.3636C12.8864 13.7779 13.2222 14.1136 13.6364 14.1136V12.6136ZM12.6839 17.3078L17.1839 7.30777L15.8161 6.69223L11.3161 16.6922L12.6839 17.3078ZM21.6839 16.6922L20.0476 13.0559L18.6797 13.6714L20.3161 17.3078L21.6839 16.6922ZM20.0476 13.0559L17.1839 6.69223L15.8161 7.30777L18.6797 13.6714L20.0476 13.0559ZM19.3636 12.6136H13.6364V14.1136H19.3636V12.6136Z' fill='navy'></path> </g></svg>");
-}
-
 .bg-icon-cancela-filtro-ativo {
   background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='black'><g id='SVGRepo_blackgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Filter_Off'> <path id='Vector' d='M13 4H18.4C18.9601 4 19.2409 4 19.4548 4.10899C19.6429 4.20487 19.7948 4.35774 19.8906 4.5459C19.9996 4.75981 20 5.04005 20 5.6001V6.3448C20 6.58444 20 6.70551 19.9727 6.81942C19.9482 6.92146 19.9072 7.01893 19.8524 7.1084C19.7906 7.20931 19.7043 7.2958 19.5314 7.46875L18 9.00012M7.49961 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7083C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9809 14.1475 12.8915C14.2091 12.7909 14.2952 12.7048 14.4669 12.5331L14.4688 12.5314L15.5001 11.5001M15.5001 11.5001L5 1M15.5001 11.5001L19 15' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>");
 }
 
 .bg-icon-cancela-filtro-inativo {
   background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='lightgray'><g id='SVGRepo_lightgraygCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Filter_Off'> <path id='Vector' d='M13 4H18.4C18.9601 4 19.2409 4 19.4548 4.10899C19.6429 4.20487 19.7948 4.35774 19.8906 4.5459C19.9996 4.75981 20 5.04005 20 5.6001V6.3448C20 6.58444 20 6.70551 19.9727 6.81942C19.9482 6.92146 19.9072 7.01893 19.8524 7.1084C19.7906 7.20931 19.7043 7.2958 19.5314 7.46875L18 9.00012M7.49961 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7083C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9809 14.1475 12.8915C14.2091 12.7909 14.2952 12.7048 14.4669 12.5331L14.4688 12.5314L15.5001 11.5001M15.5001 11.5001L5 1M15.5001 11.5001L19 15' stroke='lightgray' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>");
-}
-
-.bg-icon-left-arrow {
-  background-image: url("data:image/svg+xml,<svg width='54px' height='54px' viewBox='0 -0.5 17 17' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='si-glyph si-glyph-arrow-thick-left' fill='rgb(0,0,0)'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>1210</title> <defs> </defs> <g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <path d='M0.133,8.367 L6.073,13.713 C6.307,13.924 6.687,13.922 6.922,13.711 L6.927,9.983 L14.951,9.983 C15.504,9.983 15.951,9.544 15.951,9.001 L15.951,7.035 C15.951,6.492 15.504,6.053 14.951,6.053 L6.931,6.053 L6.936,2.243 C6.705,2.034 6.324,2.035 6.088,2.246 L0.134,7.603 C-0.099,7.816 -0.102,8.156 0.133,8.367 L0.133,8.367 Z' fill='rgb(128, 128, 128)' class='si-glyph-fill'> </path> </g> </g></svg>");
-}
-
-.bg-icone-pesquisar {
-  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='lightgray'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path fill-rule='evenodd' clip-rule='evenodd' d='M17.0392 15.6244C18.2714 14.084 19.0082 12.1301 19.0082 10.0041C19.0082 5.03127 14.9769 1 10.0041 1C5.03127 1 1 5.03127 1 10.0041C1 14.9769 5.03127 19.0082 10.0041 19.0082C12.1301 19.0082 14.084 18.2714 15.6244 17.0392L21.2921 22.707C21.6828 23.0977 22.3163 23.0977 22.707 22.707C23.0977 22.3163 23.0977 21.6828 22.707 21.2921L17.0392 15.6244ZM10.0041 17.0173C6.1308 17.0173 2.99087 13.8774 2.99087 10.0041C2.99087 6.1308 6.1308 2.99087 10.0041 2.99087C13.8774 2.99087 17.0173 6.1308 17.0173 10.0041C17.0173 13.8774 13.8774 17.0173 10.0041 17.0173Z' fill='lightgray'></path> </g></svg>");
-}
-
-.bg-icone-novo-registro {
-  background-image: url("data:image/svg+xml,<svg fill='navy' width='34px' height='34px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'><path d='M4,23H20a1,1,0,0,0,1-1V6a1,1,0,0,0-.293-.707l-4-4A1,1,0,0,0,16,1H4A1,1,0,0,0,3,2V22A1,1,0,0,0,4,23ZM5,3H15.586L19,6.414V21H5Zm11,9a1,1,0,0,1-1,1H13v2a1,1,0,0,1-2,0V13H9a1,1,0,0,1,0-2h2V9a1,1,0,0,1,2,0v2h2A1,1,0,0,1,16,12Z'></path></g></svg>");
 }
 
 .bg-icon-somente-registro-ativo {
@@ -1327,12 +1243,36 @@ video {
   background-image: url("data:image/svg+xml,<svg width='34px' height='34px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='gray' transform='rotate(180)' stroke='gray'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>/svg/ic-switch-on</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='ic-switch-on' fill-rule='nonzero' fill='gray'> <path d='M3,12 C3,14.2046438 4.78852545,16 6.9947834,16 L17.0052166,16 C19.2082844,16 21,14.209139 21,12 C21,9.79535615 19.2114745,8 17.0052166,8 L6.9947834,8 C4.79171562,8 3,9.790861 3,12 Z M1,12 C1,8.68773136 3.68570682,6 6.9947834,6 L17.0052166,6 C20.3154275,6 23,8.69016475 23,12 C23,15.3122686 20.3142932,18 17.0052166,18 L6.9947834,18 C3.68457248,18 1,15.3098352 1,12 Z M17,15 C15.3431458,15 14,13.6568542 14,12 C14,10.3431458 15.3431458,9 17,9 C18.6568542,9 20,10.3431458 20,12 C20,13.6568542 18.6568542,15 17,15 Z' id='Rectangle-75'> </path> </g> </g> </g></svg>");
 }
 
-.bg-icon-right-arrow {
-  background-image: url("data:image/svg+xml,<svg width='54px' height='54px' viewBox='0 -0.5 17 17' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='si-glyph si-glyph-arrow-thick-left' fill='rgb(0,0,0)' transform='rotate(180)'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>1210</title> <defs> </defs> <g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <path d='M0.133,8.367 L6.073,13.713 C6.307,13.924 6.687,13.922 6.922,13.711 L6.927,9.983 L14.951,9.983 C15.504,9.983 15.951,9.544 15.951,9.001 L15.951,7.035 C15.951,6.492 15.504,6.053 14.951,6.053 L6.931,6.053 L6.936,2.243 C6.705,2.034 6.324,2.035 6.088,2.246 L0.134,7.603 C-0.099,7.816 -0.102,8.156 0.133,8.367 L0.133,8.367 Z' fill='rgb(128, 128, 128)' class='si-glyph-fill'> </path> </g> </g></svg>");
+.bg-icone-arrastar {
+  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='rgb(0,0,0)'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'><line x1='32' y1='8' x2='32' y2='56'></line><line x1='56' y1='32' x2='8' y2='32'></line><polyline points='40 16 32 8 24 16'></polyline><polyline points='24 48 32 56 40 48'></polyline><polyline points='48 40 56 32 48 24'></polyline><polyline points='16 24 8 32 16 40'></polyline></g></svg>");
 }
 
-.bg-icon-schedule {
-  background-image: url("data:image/svg+xml,<svg width='54px' height='54px' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M52.618 13.061H12.142C9.20051 13.061 6.81598 15.4456 6.81598 18.387V47.501C6.81598 50.4425 9.20051 52.827 12.142 52.827H52.618C55.5595 52.827 57.944 50.4425 57.944 47.501V18.387C57.944 15.4456 55.5595 13.061 52.618 13.061Z' stroke='rgb(0,0,0)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6.81598 24.423H57.944' stroke='rgb(0,0,0)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M21.018 10.22V15.901' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M43.742 10.22V15.901' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M13.714 34.22H19.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M13.714 42.22H19.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M29.713 34.22H35.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M45.714 34.22H51.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>");
+.bg-icone-cancelar {
+  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='black' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
+}
+
+.bg-icone-excluir {
+  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='white'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='white' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
+}
+
+.bg-icone-fornecedores {
+  background-image: url("data:image/svg+xml,<svg fill='navy' width='64px' height='64px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' id='Stay_x5F_organize' version='1.1' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' stroke='navy'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g> <path d='M488.303,229.44l-26.801-5.893c-5.053-1.107-8.932-5.08-10.004-10.143c-4.242-20.045-11.472-38.979-21.233-56.311 c-2.387-4.236-2.236-9.438,0.387-13.533l16.389-25.586c3.336-5.207,2.597-12.033-1.776-16.406l-27.195-27.197 c-4.373-4.373-11.197-5.111-16.404-1.777L378.79,87.241c-4.35,2.785-9.916,2.748-14.256-0.059 c-16.818-10.889-35.375-19.313-55.166-24.771c-4.697-1.295-8.289-5.084-9.332-9.844l-6.469-29.617 c-1.324-6.041-6.676-10.451-12.859-10.451h-38.465c-6.184,0-11.533,4.41-12.855,10.451l-5.863,26.786 c-1.1,5.027-5.037,8.958-10.063,10.051c-19.986,4.352-38.85,11.707-56.109,21.551c-4.248,2.42-9.479,2.301-13.598-0.336 L117.923,64.46c-5.207-3.332-12.035-2.592-16.406,1.779l-27.199,27.2c-4.373,4.371-5.111,11.2-1.777,16.407l15.131,23.629 c2.771,4.326,2.75,9.858-0.016,14.19c-10.576,16.566-18.775,34.793-24.119,54.205c-1.295,4.703-5.082,8.301-9.848,9.348 l-30.766,6.725c-6.041,1.326-10.422,6.676-10.422,12.859v38.463c0,6.184,4.381,11.533,10.422,12.859l28.128,6.156 c5.014,1.1,8.93,5.02,10.038,10.031c4.303,19.453,11.459,37.838,20.979,54.701c2.396,4.244,2.268,9.453-0.361,13.557l-17.297,27.02 c-3.336,5.205-2.595,12.031,1.778,16.404l27.199,27.199c4.373,4.371,11.198,5.111,16.405,1.775l24.54-15.713 c4.336-2.777,9.877-2.746,14.215,0.033c16.268,10.42,34.145,18.545,53.178,23.922c4.668,1.318,8.229,5.09,9.266,9.824l6.9,31.298 c1.324,6.039,6.674,10.168,12.857,10.168h38.465c6.184,0,11.531-4.129,12.857-10.168l6.189-28.145 c1.105-5.041,5.063-8.906,10.107-9.992c19.514-4.197,37.969-11.222,54.908-20.661c4.23-2.359,9.408-2.202,13.488,0.411 l26.771,17.148c5.207,3.336,12.033,2.597,16.404-1.774l27.201-27.199c4.369-4.371,5.109-11.198,1.777-16.405l-15.232-23.78 c-2.789-4.359-2.744-9.938,0.074-14.279c10.732-16.521,19.082-34.732,24.574-54.143c1.322-4.662,5.094-8.215,9.822-9.248 l30.147-6.645c6.041-1.324,10.197-6.674,10.197-12.857v-38.465C498.5,236.114,494.344,230.765,488.303,229.44z M254.407,407.585 c-82.277,0-148.979-66.701-148.979-148.979s66.701-148.979,148.979-148.979s148.977,66.701,148.977,148.979 S336.685,407.585,254.407,407.585z'></path> <path d='M196.716,237.659c12.982,0,23.504-10.525,23.504-23.504c0-12.982-10.521-23.506-23.504-23.506 c-12.98,0-23.504,10.523-23.504,23.506C173.212,227.134,183.735,237.659,196.716,237.659z'></path> <path d='M316.192,237.659c12.982,0,23.504-10.525,23.504-23.504c0-12.982-10.521-23.506-23.504-23.506 c-12.98,0-23.504,10.523-23.504,23.506C292.688,227.134,303.212,237.659,316.192,237.659z'></path> <circle cx='256.364' cy='229.3' r='23.506'></circle> <path d='M255.5,262.124c-25.129,0-45,20.371-45,45.498v9.342c0,1.818,1.614,3.536,3.437,3.536h84.406 c1.818,0,2.157-1.718,2.157-3.536v-9.342C300.5,282.495,280.629,262.124,255.5,262.124z'></path> <path d='M226.599,258.633c-8.012-7.124-19.295-11.559-30.852-11.559c-25.133,0-46.247,20.288-46.247,45.397v9.336 c0,1.824,2.968,3.692,4.792,3.692h45.162C200.452,284.5,211.034,268.627,226.599,258.633z'></path> <path d='M315.993,246.978c-11.609,0-22.168,4.573-30.191,11.722c15.502,9.988,26.025,25.801,27.023,46.801h45.338 c1.822,0,3.337-1.868,3.337-3.692v-9.336c0-12.555-5.102-23.941-13.334-32.152C339.93,252.062,328.569,246.978,315.993,246.978z'></path> </g> </g></svg>");
+}
+
+.bg-icone-novo-registro {
+  background-image: url("data:image/svg+xml,<svg fill='navy' width='34px' height='34px' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'><path d='M4,23H20a1,1,0,0,0,1-1V6a1,1,0,0,0-.293-.707l-4-4A1,1,0,0,0,16,1H4A1,1,0,0,0,3,2V22A1,1,0,0,0,4,23ZM5,3H15.586L19,6.414V21H5Zm11,9a1,1,0,0,1-1,1H13v2a1,1,0,0,1-2,0V13H9a1,1,0,0,1,0-2h2V9a1,1,0,0,1,2,0v2h2A1,1,0,0,1,16,12Z'></path></g></svg>");
+}
+
+.bg-icone-pesquisar {
+  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='lightgray'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path fill-rule='evenodd' clip-rule='evenodd' d='M17.0392 15.6244C18.2714 14.084 19.0082 12.1301 19.0082 10.0041C19.0082 5.03127 14.9769 1 10.0041 1C5.03127 1 1 5.03127 1 10.0041C1 14.9769 5.03127 19.0082 10.0041 19.0082C12.1301 19.0082 14.084 18.2714 15.6244 17.0392L21.2921 22.707C21.6828 23.0977 22.3163 23.0977 22.707 22.707C23.0977 22.3163 23.0977 21.6828 22.707 21.2921L17.0392 15.6244ZM10.0041 17.0173C6.1308 17.0173 2.99087 13.8774 2.99087 10.0041C2.99087 6.1308 6.1308 2.99087 10.0041 2.99087C13.8774 2.99087 17.0173 6.1308 17.0173 10.0041C17.0173 13.8774 13.8774 17.0173 10.0041 17.0173Z' fill='lightgray'></path> </g></svg>");
+}
+
+.bg-icone-salvar {
+  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 -2 18 18' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='white'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>action / 5 - action, check, checkmark, ok icon</title> <g id='Free-Icons' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'> <g transform='translate(-452.000000, -85.000000)' id='Group' stroke='white' stroke-width='2'> <g transform='translate(449.000000, 80.000000)' id='Shape'> <polyline points='4 10.5711735 10.2222222 18 20 6'> </polyline> </g> </g> </g> </g></svg>");
+}
+
+.bg-icone-usuarios {
+  background-image: url("data:image/svg+xml,<svg width='64px' height='64px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <circle cx='12' cy='9' r='3' stroke='#1C274C' stroke-width='1.5'></circle> <path d='M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> <path d='M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> </g></svg>");
 }
 
 .bg-auto {
@@ -1498,10 +1438,6 @@ video {
   font-size: 20px;
 }
 
-.text-\[30px\] {
-  font-size: 30px;
-}
-
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1527,10 +1463,6 @@ video {
 
 .leading-10 {
   line-height: 2.5rem;
-}
-
-.leading-\[60px\] {
-  line-height: 60px;
 }
 
 .text-black {
@@ -1639,7 +1571,7 @@ though this was thought to be a tailwind file, I use some moments vanilla css to
 }
 
 #headerLogo {
-  background-image: url("./assets/images/hiringmachine_io_logo.jpeg");
+  background-image: url("./assets/images/logo-revendamais.png");
   background-repeat: no-repeat;
   background-size: 60px 60px;
   display: flex;
@@ -1688,7 +1620,7 @@ though this was thought to be a tailwind file, I use some moments vanilla css to
 }
 
 /*********************************************************************************************************************************
-customized input type='checkbox' to select language/country, switcher button appearance 
+input type='checkbox' customizado para parecer um seletor on/off, usado na selecao do backend
 *********************************************************************************************************************************/
 
 .switch_backend {
@@ -1834,7 +1766,7 @@ input:checked + .slider_backend:before {
   border-color: rgb(156 163 175 / var(--tw-border-opacity, 1));
 }
 
-.carsBrowser {
+.topMenu {
   display: flex;
   height: 100%;
   flex-grow: 1;
@@ -1843,7 +1775,7 @@ input:checked + .slider_backend:before {
   padding-left: 0.5rem;
 }
 
-.carCard {
+.itemMenu {
   display: flex;
   height: 100%;
   width: 230px;
@@ -1861,13 +1793,13 @@ input:checked + .slider_backend:before {
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }
 
-.carCard:hover {
+.itemMenu:hover {
   border-width: 3px;
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity, 1));
 }
 
-.carCardSelected {
+.itemMenuSelected {
   border-width: 3px;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 128 / var(--tw-border-opacity, 1));
@@ -1887,8 +1819,8 @@ input:checked + .slider_backend:before {
   flex-direction: column;
 }
 
-.btnBOOKING_ADD_CAR_RESERVATION {
-  /* icon-ask-car is defined in tailwind.config.js */
+.btnTABELA_FORNECEDORES {
+  /* icone-fornecedores esta definido em tailwind.config.js */
   box-sizing: border-box;
   height: 3rem;
   width: 130px;
@@ -1897,150 +1829,18 @@ input:checked + .slider_backend:before {
   border-width: 2px;
   border-color: transparent;
   background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg version='1.0' xmlns='http://www.w3.org/2000/svg'  width='64px' height='64px' viewBox='0 0 200.000000 200.000000'  preserveAspectRatio='xMidYMid meet'>  <g transform='translate(0.000000,200.000000) scale(0.100000,-0.100000)' fill='rgb(0,0,0)' stroke='none'> <path d='M1394 1826 c-49 -22 -74 -61 -74 -118 0 -43 5 -55 33 -83 43 -43 79 -52 131 -34 107 37 114 192 11 235 -42 17 -61 17 -101 0z'/> <path d='M1258 1534 c-27 -12 -59 -46 -127 -134 -50 -66 -95 -122 -100 -125 -5 -3 -58 17 -117 45 -59 27 -117 50 -129 50 -40 0 -69 -53 -47 -87 8 -13 116 -68 239 -122 55 -24 77 -29 91 -22 11 6 57 60 103 120 l84 111 5 -546 5 -546 24 -19 c32 -26 67 -24 96 6 l25 24 0 306 0 305 35 0 35 0 0 -309 0 -310 26 -20 c35 -28 69 -26 99 4 l25 24 0 531 0 530 25 0 25 0 0 -202 c0 -143 4 -210 13 -228 16 -31 61 -39 88 -14 18 16 19 33 19 258 0 213 -3 246 -19 282 -39 85 -102 104 -335 103 -112 0 -161 -4 -188 -15z'/> <path d='M612 531 l-584 -316 80 -3 79 -3 504 272 c277 150 505 274 507 275 2 1 2 22 0 46 l-3 44 -583 -315z'/> <path d='M1752 488 l3 -243 110 0 110 0 3 243 2 242 -115 0 -115 0 2 -242z'/> <path d='M1006 369 l-178 -149 61 0 62 0 125 102 124 103 0 47 c0 27 -3 48 -7 47 -5 0 -88 -67 -187 -150z'/> </g> </svg> ");
+  background-image: url("data:image/svg+xml,<svg fill='navy' width='64px' height='64px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' id='Stay_x5F_organize' version='1.1' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' stroke='navy'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g> <path d='M488.303,229.44l-26.801-5.893c-5.053-1.107-8.932-5.08-10.004-10.143c-4.242-20.045-11.472-38.979-21.233-56.311 c-2.387-4.236-2.236-9.438,0.387-13.533l16.389-25.586c3.336-5.207,2.597-12.033-1.776-16.406l-27.195-27.197 c-4.373-4.373-11.197-5.111-16.404-1.777L378.79,87.241c-4.35,2.785-9.916,2.748-14.256-0.059 c-16.818-10.889-35.375-19.313-55.166-24.771c-4.697-1.295-8.289-5.084-9.332-9.844l-6.469-29.617 c-1.324-6.041-6.676-10.451-12.859-10.451h-38.465c-6.184,0-11.533,4.41-12.855,10.451l-5.863,26.786 c-1.1,5.027-5.037,8.958-10.063,10.051c-19.986,4.352-38.85,11.707-56.109,21.551c-4.248,2.42-9.479,2.301-13.598-0.336 L117.923,64.46c-5.207-3.332-12.035-2.592-16.406,1.779l-27.199,27.2c-4.373,4.371-5.111,11.2-1.777,16.407l15.131,23.629 c2.771,4.326,2.75,9.858-0.016,14.19c-10.576,16.566-18.775,34.793-24.119,54.205c-1.295,4.703-5.082,8.301-9.848,9.348 l-30.766,6.725c-6.041,1.326-10.422,6.676-10.422,12.859v38.463c0,6.184,4.381,11.533,10.422,12.859l28.128,6.156 c5.014,1.1,8.93,5.02,10.038,10.031c4.303,19.453,11.459,37.838,20.979,54.701c2.396,4.244,2.268,9.453-0.361,13.557l-17.297,27.02 c-3.336,5.205-2.595,12.031,1.778,16.404l27.199,27.199c4.373,4.371,11.198,5.111,16.405,1.775l24.54-15.713 c4.336-2.777,9.877-2.746,14.215,0.033c16.268,10.42,34.145,18.545,53.178,23.922c4.668,1.318,8.229,5.09,9.266,9.824l6.9,31.298 c1.324,6.039,6.674,10.168,12.857,10.168h38.465c6.184,0,11.531-4.129,12.857-10.168l6.189-28.145 c1.105-5.041,5.063-8.906,10.107-9.992c19.514-4.197,37.969-11.222,54.908-20.661c4.23-2.359,9.408-2.202,13.488,0.411 l26.771,17.148c5.207,3.336,12.033,2.597,16.404-1.774l27.201-27.199c4.369-4.371,5.109-11.198,1.777-16.405l-15.232-23.78 c-2.789-4.359-2.744-9.938,0.074-14.279c10.732-16.521,19.082-34.732,24.574-54.143c1.322-4.662,5.094-8.215,9.822-9.248 l30.147-6.645c6.041-1.324,10.197-6.674,10.197-12.857v-38.465C498.5,236.114,494.344,230.765,488.303,229.44z M254.407,407.585 c-82.277,0-148.979-66.701-148.979-148.979s66.701-148.979,148.979-148.979s148.977,66.701,148.977,148.979 S336.685,407.585,254.407,407.585z'></path> <path d='M196.716,237.659c12.982,0,23.504-10.525,23.504-23.504c0-12.982-10.521-23.506-23.504-23.506 c-12.98,0-23.504,10.523-23.504,23.506C173.212,227.134,183.735,237.659,196.716,237.659z'></path> <path d='M316.192,237.659c12.982,0,23.504-10.525,23.504-23.504c0-12.982-10.521-23.506-23.504-23.506 c-12.98,0-23.504,10.523-23.504,23.506C292.688,227.134,303.212,237.659,316.192,237.659z'></path> <circle cx='256.364' cy='229.3' r='23.506'></circle> <path d='M255.5,262.124c-25.129,0-45,20.371-45,45.498v9.342c0,1.818,1.614,3.536,3.437,3.536h84.406 c1.818,0,2.157-1.718,2.157-3.536v-9.342C300.5,282.495,280.629,262.124,255.5,262.124z'></path> <path d='M226.599,258.633c-8.012-7.124-19.295-11.559-30.852-11.559c-25.133,0-46.247,20.288-46.247,45.397v9.336 c0,1.824,2.968,3.692,4.792,3.692h45.162C200.452,284.5,211.034,268.627,226.599,258.633z'></path> <path d='M315.993,246.978c-11.609,0-22.168,4.573-30.191,11.722c15.502,9.988,26.025,25.801,27.023,46.801h45.338 c1.822,0,3.337-1.868,3.337-3.692v-9.336c0-12.555-5.102-23.941-13.334-32.152C339.93,252.062,328.569,246.978,315.993,246.978z'></path> </g> </g></svg>");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.btnBOOKING_ADD_CAR_RESERVATION:hover {
+.btnTABELA_FORNECEDORES:hover {
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
 }
 
-.btnBOOKING_CALENDAR {
-  /* icon-left-arrow is defined in tailwind.config.js */
-  box-sizing: border-box;
-  height: 3rem;
-  width: 130px;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  border-width: 2px;
-  border-color: transparent;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg width='54px' height='54px' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M52.618 13.061H12.142C9.20051 13.061 6.81598 15.4456 6.81598 18.387V47.501C6.81598 50.4425 9.20051 52.827 12.142 52.827H52.618C55.5595 52.827 57.944 50.4425 57.944 47.501V18.387C57.944 15.4456 55.5595 13.061 52.618 13.061Z' stroke='rgb(0,0,0)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6.81598 24.423H57.944' stroke='rgb(0,0,0)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M21.018 10.22V15.901' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M43.742 10.22V15.901' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M13.714 34.22H19.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M13.714 42.22H19.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M29.713 34.22H35.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M45.714 34.22H51.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.btnBOOKING_CALENDAR:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.btnBOOKING_ALL_CARS {
-  /* icon-all-cars is defined in tailwind.config.js */
-  box-sizing: border-box;
-  height: 3rem;
-  width: 130px;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  border-width: 2px;
-  border-color: transparent;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg width='64px' height='64px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' stroke='navy'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <g id='Interface / Filter_Off'> <path id='Vector' d='M13 4H18.4C18.9601 4 19.2409 4 19.4548 4.10899C19.6429 4.20487 19.7948 4.35774 19.8906 4.5459C19.9996 4.75981 20 5.04005 20 5.6001V6.3448C20 6.58444 20 6.70551 19.9727 6.81942C19.9482 6.92146 19.9072 7.01893 19.8524 7.1084C19.7906 7.20931 19.7043 7.2958 19.5314 7.46875L18 9.00012M7.49961 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7083C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9809 14.1475 12.8915C14.2091 12.7909 14.2952 12.7048 14.4669 12.5331L14.4688 12.5314L15.5001 11.5001M15.5001 11.5001L5 1M15.5001 11.5001L19 15' stroke='navy' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path> </g> </g></svg>");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.btnBOOKING_ALL_CARS:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.btnBOOKING_ALL_CARS_ACTIVE {
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 128 / var(--tw-border-opacity, 1));
-}
-
-.btnBOOKING_LEFT_ARROW {
-  /* icon-left-arrow is defined in tailwind.config.js */
-  box-sizing: border-box;
-  height: 3rem;
-  width: 130px;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  border-width: 2px;
-  border-color: transparent;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg width='54px' height='54px' viewBox='0 -0.5 17 17' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='si-glyph si-glyph-arrow-thick-left' fill='rgb(0,0,0)'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>1210</title> <defs> </defs> <g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <path d='M0.133,8.367 L6.073,13.713 C6.307,13.924 6.687,13.922 6.922,13.711 L6.927,9.983 L14.951,9.983 C15.504,9.983 15.951,9.544 15.951,9.001 L15.951,7.035 C15.951,6.492 15.504,6.053 14.951,6.053 L6.931,6.053 L6.936,2.243 C6.705,2.034 6.324,2.035 6.088,2.246 L0.134,7.603 C-0.099,7.816 -0.102,8.156 0.133,8.367 L0.133,8.367 Z' fill='rgb(128, 128, 128)' class='si-glyph-fill'> </path> </g> </g></svg>");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.btnBOOKING_LEFT_ARROW:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.btnBOOKING_RIGHT_ARROW {
-  /* icon-left-arrow is defined in tailwind.config.js */
-  box-sizing: border-box;
-  height: 3rem;
-  width: 130px;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  border-width: 2px;
-  border-color: transparent;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg width='54px' height='54px' viewBox='0 -0.5 17 17' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='si-glyph si-glyph-arrow-thick-left' fill='rgb(0,0,0)' transform='rotate(180)'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>1210</title> <defs> </defs> <g stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <path d='M0.133,8.367 L6.073,13.713 C6.307,13.924 6.687,13.922 6.922,13.711 L6.927,9.983 L14.951,9.983 C15.504,9.983 15.951,9.544 15.951,9.001 L15.951,7.035 C15.951,6.492 15.504,6.053 14.951,6.053 L6.931,6.053 L6.936,2.243 C6.705,2.034 6.324,2.035 6.088,2.246 L0.134,7.603 C-0.099,7.816 -0.102,8.156 0.133,8.367 L0.133,8.367 Z' fill='rgb(128, 128, 128)' class='si-glyph-fill'> </path> </g> </g></svg>");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.btnBOOKING_RIGHT_ARROW:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.btnCARS_TABLE {
-  /* icon-car is defined in tailwind.config.js */
-  box-sizing: border-box;
-  height: 3rem;
-  width: 130px;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  border-width: 2px;
-  border-color: transparent;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' aria-hidden='true' role='img' class='iconify iconify--gis' preserveAspectRatio='xMidYMid meet' fill='black' stroke='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'><path d='M49.368 11.228c-11.646-.171-27.826.079-31.156 9.027l-8.184 19.204a2.85 2.85 0 0 0-1.37-.865l-3.296-.927a2.86 2.86 0 0 0-3.534 1.983l-1.72 6.104a2.86 2.86 0 0 0 1.983 3.535l3.297.927c.11.03.22.04.33.059c-.63 1.569-1.023 3.295-1.023 4.322v22.32c0 1.145.48 1.674 1.243 1.922v5.947a4.008 4.008 0 0 0 4.017 4.017H20.73a4.008 4.008 0 0 0 4.017-4.017v-5.729h50.504v5.729a4.01 4.01 0 0 0 4.018 4.017h10.775a4.01 4.01 0 0 0 4.019-4.017v-5.947c.763-.248 1.24-.777 1.24-1.922v-22.32c0-1.027-.393-2.753-1.022-4.322c.11-.018.22-.028.33-.06l3.297-.926a2.86 2.86 0 0 0 1.982-3.535l-1.717-6.104a2.861 2.861 0 0 0-3.536-1.983l-3.295.927a2.855 2.855 0 0 0-1.37.865l-8.185-19.204c-3.57-9.084-20.773-8.856-32.42-9.027zm33.358 29.444c.194.576-.386.96-.993.995c0 0-1.984.168-4.72.389c-2.082-4.864-6.92-8.292-12.525-8.292c-6.151 0-11.373 4.13-13.048 9.754c-.464.006-1.003.026-1.435.026c-10.596 0-31.738-1.877-31.738-1.877c-.607-.036-1.187-.419-.993-.995c8.142-24.821 8.385-22.955 32.275-22.694c23.891.26 24.03-1.513 33.177 22.694zm-18.238-2.217a8.886 8.886 0 0 1 7.447 3.991c-4.785.356-10.292.719-15.424.93a8.879 8.879 0 0 1 7.977-4.921zM9.407 46.511c.072.106.142.213.221.317h-.31zm5.294 6.234c2.096-.035 13.348 3.753 13.348 3.753c1.405.395 2.642 3.051 2.635 4.511c-.021 4.917-12.71 3.21-17.86 3.23a2.63 2.63 0 0 1-2.635-2.634V55.38c0-1.46 2.416-2.6 4.512-2.635zm70.598 0c2.096.034 4.512 1.175 4.512 2.635v6.225a2.63 2.63 0 0 1-2.635 2.635c-5.15-.02-17.839 1.686-17.86-3.23c-.007-1.46 1.23-4.117 2.635-4.512c0 0 11.252-3.788 13.348-3.753z' fill='black'></path></g></svg>");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.btnCARS_TABLE:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.btnEXPRESSIONS_TABLE {
-  /* icon-expressions is defined in tailwind.config.js */
-  box-sizing: border-box;
-  height: 3rem;
-  width: 130px;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  border-width: 2px;
-  border-color: transparent;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg width='24px' height='24px' viewBox='0 2 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path opacity='0.5' d='M13 7L3 7' stroke='navy' stroke-width='1.5' stroke-linecap='round'></path> <path opacity='0.5' d='M10 12H3' stroke='navy' stroke-width='1.5' stroke-linecap='round'></path> <path opacity='0.5' d='M8 17H3' stroke='navy' stroke-width='1.5' stroke-linecap='round'></path> <path d='M11.3161 16.6922C11.1461 17.07 11.3145 17.514 11.6922 17.6839C12.07 17.8539 12.514 17.6855 12.6839 17.3078L11.3161 16.6922ZM16.5 7L17.1839 6.69223C17.0628 6.42309 16.7951 6.25 16.5 6.25C16.2049 6.25 15.9372 6.42309 15.8161 6.69223L16.5 7ZM20.3161 17.3078C20.486 17.6855 20.93 17.8539 21.3078 17.6839C21.6855 17.514 21.8539 17.07 21.6839 16.6922L20.3161 17.3078ZM19.3636 13.3636L20.0476 13.0559L19.3636 13.3636ZM13.6364 12.6136C13.2222 12.6136 12.8864 12.9494 12.8864 13.3636C12.8864 13.7779 13.2222 14.1136 13.6364 14.1136V12.6136ZM12.6839 17.3078L17.1839 7.30777L15.8161 6.69223L11.3161 16.6922L12.6839 17.3078ZM21.6839 16.6922L20.0476 13.0559L18.6797 13.6714L20.3161 17.3078L21.6839 16.6922ZM20.0476 13.0559L17.1839 6.69223L15.8161 7.30777L18.6797 13.6714L20.0476 13.0559ZM19.3636 12.6136H13.6364V14.1136H19.3636V12.6136Z' fill='navy'></path> </g></svg>");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.btnEXPRESSIONS_TABLE:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.btnSCHEDULE_TABLE {
+.btnTABELA_USUARIOS {
   /* icon-schedule is defined in tailwind.config.js */
   box-sizing: border-box;
   height: 3rem;
@@ -2050,47 +1850,22 @@ input:checked + .slider_backend:before {
   border-width: 2px;
   border-color: transparent;
   background-color: transparent;
-  background-image: url("data:image/svg+xml,<svg width='54px' height='54px' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M52.618 13.061H12.142C9.20051 13.061 6.81598 15.4456 6.81598 18.387V47.501C6.81598 50.4425 9.20051 52.827 12.142 52.827H52.618C55.5595 52.827 57.944 50.4425 57.944 47.501V18.387C57.944 15.4456 55.5595 13.061 52.618 13.061Z' stroke='rgb(0,0,0)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M6.81598 24.423H57.944' stroke='rgb(0,0,0)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M21.018 10.22V15.901' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M43.742 10.22V15.901' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M13.714 34.22H19.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M13.714 42.22H19.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M29.713 34.22H35.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> <path d='M45.714 34.22H51.047' stroke='rgb(66, 106, 178)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'></path> </g></svg>");
+  background-image: url("data:image/svg+xml,<svg width='64px' height='64px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <circle cx='12' cy='9' r='3' stroke='#1C274C' stroke-width='1.5'></circle> <path d='M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> <path d='M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7' stroke='#1C274C' stroke-width='1.5' stroke-linecap='round'></path> </g></svg>");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.btnSCHEDULE_TABLE:hover {
+.btnTABELA_USUARIOS:hover {
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.tdBookingHeader {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  border-width: 2px;
-  border-color: transparent;
-}
-
-.tdBookingHeader:hover {
-  border-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
-}
-
-.tdBookingCell {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  border-left-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity, 1));
 }
 
 .bottomToolbar {
   height: 30px;
 }
 
-/* puppy icon, bottom right corner */
+/* icone cachorrinho, canto inferior direito */
 
 div._doggy {
   bottom: 5px;
@@ -2101,7 +1876,7 @@ div._doggy {
   height: 40px;
   float: right;
   cursor: pointer;
-  background: url('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com/images/_dog.png') no-repeat top left;
+  background: url('./assets/images/_dog.png') no-repeat top left;
 }
 
 div._doggy_1 {
@@ -2113,7 +1888,7 @@ div._doggy_1 {
   width: 16px;
   height: 16px;
   float: right;
-  background: url('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com/images/thought_1.png') no-repeat top left;
+  background: url('./assets/images/thought_1.png') no-repeat top left;
 }
 
 div._doggy_2 {
@@ -2125,7 +1900,7 @@ div._doggy_2 {
   width: 30px;
   height: 30px;
   float: right;
-  background: url('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com/images/thought_2.png') no-repeat top left;
+  background: url('./assets/images/thought_2.png') no-repeat top left;
 }
 
 div._doggy_3 {
@@ -2137,24 +1912,11 @@ div._doggy_3 {
   background-color: red;
   width: 342px;
   height: 133px;
-  background: url('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com/images/thought_3.png') no-repeat top left;
+  background: url('./assets/images/thought_3.png') no-repeat top left;
   float: right;
 }
 
-div._doggy_3_english {
-  display: none;
-  bottom: -100px;
-  right: 80px;
-  z-index: 2001;
-  position: absolute;
-  background-color: red;
-  width: 342px;
-  height: 133px;
-  background: url('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com/images/thought_3_english.png') no-repeat top left;
-  float: right;
-}
-
-/* prettier tooltip to highlight buttons */
+/* tooltip mais bonito, para destacar botoes/divs */
 
 .prettierTitle_black {
   background-color: #333333 !important;
@@ -2225,7 +1987,7 @@ div._doggy_3_english {
 buttons
 ****************************************************************************/
 
-button.btnCANCEL {
+button.btnCANCELAR {
   height: 30px;
   width: 150px;
   cursor: pointer;
@@ -2244,12 +2006,12 @@ button.btnCANCEL {
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
-button.btnCANCEL:hover {
+button.btnCANCELAR:hover {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
 }
 
-button.btnSAVE {
+button.btnSALVAR {
   /* icone-salvar is defined in tailwind.config.js */
   height: 30px;
   width: 170px;
@@ -2270,35 +2032,9 @@ button.btnSAVE {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-button.btnSAVE:hover {
+button.btnSALVAR:hover {
   --tw-border-opacity: 1;
   border-color: rgb(69 10 10 / var(--tw-border-opacity, 1));
-}
-
-button.btnUPLOAD {
-  /* icon-button-upload is defined in tailwind.config.js */
-  height: 30px;
-  width: 170px;
-  cursor: pointer;
-  border-radius: 6px;
-  border-width: 1px;
-  border-color: transparent;
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
-  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <path d='M18.22 20.75H5.78C5.43322 20.7359 5.09262 20.6535 4.77771 20.5075C4.4628 20.3616 4.17975 20.155 3.94476 19.8996C3.70977 19.6442 3.52745 19.3449 3.40824 19.019C3.28903 18.693 3.23525 18.3468 3.25 18V15C3.25 14.8011 3.32902 14.6103 3.46967 14.4697C3.61033 14.329 3.80109 14.25 4 14.25C4.19892 14.25 4.38968 14.329 4.53033 14.4697C4.67099 14.6103 4.75 14.8011 4.75 15V18C4.72419 18.2969 4.81365 18.5924 4.99984 18.8251C5.18602 19.0579 5.45465 19.21 5.75 19.25H18.22C18.5154 19.21 18.784 19.0579 18.9702 18.8251C19.1564 18.5924 19.2458 18.2969 19.22 18V15C19.22 14.8011 19.299 14.6103 19.4397 14.4697C19.5803 14.329 19.7711 14.25 19.97 14.25C20.1689 14.25 20.3597 14.329 20.5003 14.4697C20.641 14.6103 20.72 14.8011 20.72 15V18C20.75 18.6954 20.5041 19.3744 20.0359 19.8894C19.5677 20.4045 18.9151 20.7137 18.22 20.75Z' fill='black'></path> <path d='M16 8.74995C15.9015 8.75042 15.8038 8.7312 15.7128 8.69342C15.6218 8.65564 15.5392 8.60006 15.47 8.52995L12 5.05995L8.53 8.52995C8.38782 8.66243 8.19978 8.73455 8.00548 8.73113C7.81118 8.7277 7.62579 8.64898 7.48838 8.51157C7.35096 8.37416 7.27225 8.18877 7.26882 7.99447C7.2654 7.80017 7.33752 7.61213 7.47 7.46995L11.47 3.46995C11.6106 3.3295 11.8012 3.25061 12 3.25061C12.1987 3.25061 12.3894 3.3295 12.53 3.46995L16.53 7.46995C16.6705 7.61058 16.7493 7.8012 16.7493 7.99995C16.7493 8.1987 16.6705 8.38932 16.53 8.52995C16.4608 8.60006 16.3782 8.65564 16.2872 8.69342C16.1962 8.7312 16.0985 8.75042 16 8.74995Z' fill='black'></path> <path d='M12 15.75C11.8019 15.7474 11.6126 15.6676 11.4725 15.5275C11.3324 15.3874 11.2526 15.1981 11.25 15V4C11.25 3.80109 11.329 3.61032 11.4697 3.46967C11.6103 3.32902 11.8011 3.25 12 3.25C12.1989 3.25 12.3897 3.32902 12.5303 3.46967C12.671 3.61032 12.75 3.80109 12.75 4V15C12.7474 15.1981 12.6676 15.3874 12.5275 15.5275C12.3874 15.6676 12.1981 15.7474 12 15.75Z' fill='black'></path> </g></svg>");
-  background-size: auto;
-  background-position: left 10px center;
-  background-repeat: no-repeat;
-  padding-top: 2px;
-  padding-left: 2.25rem;
-  text-align: center;
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
-}
-
-button.btnUPLOAD:hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
 }
 
 button.btnDELETE {
@@ -2330,7 +2066,7 @@ button.btnDELETE:hover {
   border-color: rgb(69 10 10 / var(--tw-border-opacity, 1));
 }
 
-.btnTABLE_NEW_RECORD {
+.btnTABLE_NOVO_REGISTRO {
   /* icone-novo-registro is defined in tailwind.config.js */
   box-sizing: border-box;
   height: 2.25rem;
@@ -2345,7 +2081,7 @@ button.btnDELETE:hover {
   background-repeat: no-repeat;
 }
 
-.btnTABLE_NEW_RECORD:hover {
+.btnTABLE_NOVO_REGISTRO:hover {
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity, 1));
 }
@@ -2382,7 +2118,8 @@ button.btnDELETE:hover {
   cursor: pointer;
   border-radius: 0.375rem;
   border-width: 2px;
-  border-color: transparent;
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
   background-color: transparent;
   background-image: url("data:image/svg+xml,<svg width='34px' height='34px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' stroke='rgb(128, 128, 255)' fill='rgb(128, 128, 255)'  > <g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>/svg/ic-switch-on</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='ic-switch-on' fill-rule='nonzero' fill='rgb(128, 128, 255)'> <path d='M3,12 C3,14.2046438 4.78852545,16 6.9947834,16 L17.0052166,16 C19.2082844,16 21,14.209139 21,12 C21,9.79535615 19.2114745,8 17.0052166,8 L6.9947834,8 C4.79171562,8 3,9.790861 3,12 Z M1,12 C1,8.68773136 3.68570682,6 6.9947834,6 L17.0052166,6 C20.3154275,6 23,8.69016475 23,12 C23,15.3122686 20.3142932,18 17.0052166,18 L6.9947834,18 C3.68457248,18 1,15.3098352 1,12 Z M17,15 C15.3431458,15 14,13.6568542 14,12 C14,10.3431458 15.3431458,9 17,9 C18.6568542,9 20,10.3431458 20,12 C20,13.6568542 18.6568542,15 17,15 Z' id='Rectangle-75'> </path> </g> </g> </g></svg>");
   background-position: center;
@@ -2426,7 +2163,8 @@ button.btnDELETE:hover {
   cursor: pointer;
   border-radius: 0.375rem;
   border-width: 2px;
-  border-color: transparent;
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
   background-color: transparent;
   background-image: url("data:image/svg+xml,<svg width='34px' height='34px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='gray' transform='rotate(180)' stroke='gray'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>/svg/ic-switch-on</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='ic-switch-on' fill-rule='nonzero' fill='gray'> <path d='M3,12 C3,14.2046438 4.78852545,16 6.9947834,16 L17.0052166,16 C19.2082844,16 21,14.209139 21,12 C21,9.79535615 19.2114745,8 17.0052166,8 L6.9947834,8 C4.79171562,8 3,9.790861 3,12 Z M1,12 C1,8.68773136 3.68570682,6 6.9947834,6 L17.0052166,6 C20.3154275,6 23,8.69016475 23,12 C23,15.3122686 20.3142932,18 17.0052166,18 L6.9947834,18 C3.68457248,18 1,15.3098352 1,12 Z M17,15 C15.3431458,15 14,13.6568542 14,12 C14,10.3431458 15.3431458,9 17,9 C18.6568542,9 20,10.3431458 20,12 C20,13.6568542 18.6568542,15 17,15 Z' id='Rectangle-75'> </path> </g> </g> </g></svg>");
   background-position: center;
@@ -2517,7 +2255,7 @@ input[type="text"].text_formFieldValue:focus {
 datatable main parts
 ****************************************************************************/
 
-.datatableTitle {
+.datatableToolbar {
   height: 80px;
   font-size: 25px  ;
   display: flex;
@@ -2662,10 +2400,6 @@ datatable main parts
   background-color: rgb(235 246 249 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:border-2:hover {
-  border-width: 2px;
-}
-
 .hover\:border-\[3px\]:hover {
   border-width: 3px;
 }
@@ -2698,9 +2432,4 @@ datatable main parts
 .hover\:bg-\[\#ffedcc\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 237 204 / var(--tw-bg-opacity, 1));
-}
-
-.hover\:bg-gray-100:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }

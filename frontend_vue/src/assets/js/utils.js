@@ -52,7 +52,7 @@ const  isStringJSON = (string) => {
 
 
 /************************************************************************************************************************************************************
-mensagem rolante (horitontal) de alerta
+mensagem rolante (horitontal) de alerta/erro/sucesso
 ************************************************************************************************************************************************************/
 const slidingMessage = (html, time) => {
 
@@ -189,15 +189,30 @@ function improveTooltipLook() {
     }
 
   }, 500)    
-
-
 }
+
+/************************************************************************************************************************************************************
+rola o menu (top) que é horizontal, mesmo usuario acionando o mouse wheel vertical
+************************************************************************************************************************************************************/
+const toWheelMenu = e => {
+
+  if (e.type == "wheel") {
+    var getDelta = e.deltaY;
+    let divId = 'carsBrowserContainer'
+
+    if (getDelta>0) 
+      $(`#${divId}`).scrollLeft( $(`#${divId}`).scrollLeft() + 100 )
+    else 
+      $(`#${divId}`).scrollLeft( $(`#${divId}`).scrollLeft() - 100 )
+  };
+}
+
+
 
 
 
 //********************************************************************************************************************************
 //*******************************************************************************************************************************
 export { prepareLoadingAnimation, isStringJSON, slidingMessage, counter, makeWindowDraggable, divStillVisible, 
-      hourFormat, preparePuppyIcon, dateToIsoStringConsideringLocalUTC, formatDate, forceHideToolTip, loadScripts,
-      toWheelMenu, improveTooltipLook };
+      preparePuppyIcon, forceHideToolTip, loadScripts, toWheelMenu, improveTooltipLook };
 

@@ -252,7 +252,7 @@ const onKeyDown = (e) =>  {
           if (e.which == 27)   $('#btnCLOSE').trigger('click')
 
           // 'F2= salvar'
-          if (e.which == 113)   $('#btnSAVE').trigger('click')   // f2 was pressed
+          if (e.which == 113)   $('#btnSALVAR').trigger('click')   // f2 was pressed
         }
   }
 }
