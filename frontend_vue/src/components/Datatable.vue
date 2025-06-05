@@ -1,6 +1,6 @@
 
 <template>
-
+ 
     <div>    <!-- exigencia do Vue, tudo agrupado em 1 elemento -->
 
 
