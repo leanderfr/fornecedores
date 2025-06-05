@@ -1,7 +1,7 @@
 
 <template>
 
-  <div>  <!-- exigencia do Vue, tudo agrupado em 1 elemento -->
+  <div>  <!-- exigencia do Vue, elementos agrupados em 1 elemento -->
 
     <div class='appBody'>  
 
@@ -50,18 +50,14 @@
           <!-- mostra datatable se usuario pediu para ver alguma tabela  -->
           <div v-if='toDisplayDatatable'>
 
-<!--
             <Datatable  
                 :key='toRefreshDatatable'
-                :currentViewedDatatable = currentViewedDatatable
+                :currentViewedDatatable = 'currentViewedDatatable'
                 :setDatatableToDisplay='setDatatableToDisplay' 
-                :expressions='expressions' 
-                :currentBackend="isLaravelSelected ? 'usa' : 'brazil'" 
                 :backendUrl='backendUrl'    
                 @showLoading="isLoading=true" 
-                @hideLoading="isLoading=false"     
-                @setDatatableToDisplay='setDatatableToDisplay'  />
--->
+                @hideLoading="isLoading=false"      />
+
           </div>
 
 
@@ -158,20 +154,29 @@
   //***************************************************************************
   // usuario escolheu opcao no menu (top)
   //***************************************************************************
-  const setMenuItem = (itemMenu) => {
-    selectedMenuItem.value = itemMenu
+  const setMenuItem = (itemMenuId) => {
+    selectedMenuItem.value = itemMenuId
+
+    // dispara exibicao de determinada datatable
+    if (itemMenuId=='fornecedores' || itemMenuId=='usuarios') 
+      setDatatableToDisplay(itemMenuId)
+    
+    // dispara exibicao do componete Sobre.vue
+    if (itemMenuId=='fornecedores' || itemMenuId=='sobre') 
+      setDatatableToDisplay(itemMenuId)
+
+
   }
 
   //***************************************************************************
   // usuario escolheu alguma tabela pra ser exibida
   //***************************************************************************
   const setDatatableToDisplay = (datatable) => {
-    toDisplayAbout.value = false;
-    toDisplayDatatable.value = true;
-
-    toRefreshDatatable.value++  // força re-render da tabela escolhida
+    toDisplayAbout.value = false;   // fechar componente 'sobre'
+    toDisplayDatatable.value = true;     // exibe componente 'datatable'
 
     currentViewedDatatable.value = datatable
+    toRefreshDatatable.value++  // força re-render do componente 'datatable'
   }
 
     //***************************************************************************
@@ -195,8 +200,8 @@
       prepareLoadingAnimation()
 
       menuItens.value = [
-        {id: 1, titulo: 'Fornecedores', icone: 'fornecedores.svg'},
-        {id: 2, titulo: 'Usuários', icone: 'usuarios.svg'}
+        {id: 'fornecedores', titulo: 'Fornecedores', icone: 'fornecedores.svg'},
+        {id: 'usuarios', titulo: 'Usuários', icone: 'usuarios.svg'}
       ]
 
       isLoading.value = true

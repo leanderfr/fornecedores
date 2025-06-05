@@ -1,7 +1,7 @@
 
 <template>
  
-    <div>    <!-- exigencia do Vue, tudo agrupado em 1 elemento -->
+    <div>    <!-- exigencia do Vue, elementos agrupados em 1 elemento -->
 
 
     <div class='flex flex-col h-full ' id='datatableContainer'>
@@ -16,7 +16,7 @@
       </div>
 
 
-      <!-- botoes de acao da tabela (somente regs ativos, inativos, novo reg, etc)  -->
+      <!-- botoes de acao da tabela (exibir somente regs ativos, inativos, novo reg, etc)  -->
       <div class='datatableToolbar' >
         <div class='flex flex-row'>
 
@@ -30,7 +30,7 @@
               <div class="flex flex-row pt-1 text-xs"  >  
                   <div v-if="showTipSearchbox">
                     <span class="text-blue-900 font-bold">Enter</span>
-                    <span class="text-black">= {{ expressions.search_verb }}</span>
+                    <span class="text-black">= pesquisar</span>
                   </div>
                   <div v-else>&nbsp;</div> 
               </div>
@@ -40,7 +40,7 @@
             </div>
 
             <!-- reset do filtro --> 
-            <div id='btnResetTextTableFilter'  class='putPrettierTooltip' :title="expressions.reset_filter"
+            <div id='btnResetTextTableFilter'  class='putPrettierTooltip' title="Resetar o filtro"
                 :class="filterApplied ? 'btnTABLE_CANCEL_FILTER_ACTIVE' : 'btnTABLE_CANCEL_FILTER_INACTIVE'"
                 @click="forceHideToolTip();clearFilter()"  aria-hidden="true">
             </div> 
@@ -53,28 +53,28 @@
 
               <!-- exibe/esconde registros ativos -->
               <div v-if="currentStatus=='active'" class='btnTABLE_ONLY_ACTIVE_RECORDS_ON putPrettierTooltip' 
-                      :title="expressions.only_active" 
+                      title='Somente ativos'
                       @click="forceHideToolTip();currentStatus=''" 
                       aria-hidden="true"></div>   
 
               <div v-else class='btnTABLE_ONLY_ACTIVE_RECORDS_OFF putPrettierTooltip' 
-                    :title="expressions.only_active" 
+                    title='Somente ativos' 
                     @click="forceHideToolTip();currentStatus='active'" 
                     aria-hidden="true"></div>   
 
               <!-- exibe/esconde registros inativos -->
               <div v-if="currentStatus=='inactive'" class='btnTABLE_ONLY_INACTIVE_RECORDS_ON putPrettierTooltip' 
-                    :title="expressions.only_inactive" 
+                    title='Somente inativos'
                     @click="forceHideToolTip();currentStatus=''" 
                     aria-hidden="true"></div>   
 
               <div v-else class='btnTABLE_ONLY_INACTIVE_RECORDS_OFF putPrettierTooltip' 
-                  :title="expressions.only_inactive" 
-                      @click="forceHideToolTip();currentStatus='inactive'" 
+                  title='Somente inativos'
+                  @click="forceHideToolTip();currentStatus='inactive'" 
                   aria-hidden="true"></div>   
 
               <!-- novo registro -->
-              <div  class='btnTABLE_NOVO_REGISTRO putPrettierTooltip' :title="expressions.add_record" @click="editForm();" aria-hidden="true"></div>   
+              <div  class='btnTABLE_NOVO_REGISTRO putPrettierTooltip' title='Adicionar registro' @click="editForm();" aria-hidden="true"></div>   
             </div>
 
             <!-- legenda -->
@@ -135,17 +135,15 @@
 
   <!-- usuario pediu para editar/inserir fornecedor -->  
   <div v-if="exibirFormFornecedor" id='backDrop' class='w-full h-full  absolute flex items-center justify-center left-0 top-0 z-10 bg-[rgba(0,0,0,0.5)]' @click.self='exibirFormFornecedor=false' aria-hidden="true"  >  
-    <ExpressionForm 
-        :expressions='expressions' 
+    <FornecedorForm 
         :backendUrl='props.backendUrl' 
         :currentId='currentId'
         :formHttpMethodApply = 'formHttpMethodApply'  
-        @closeExpressionForm="exibirFormFornecedor=false"  
+        @closeForm="exibirFormFornecedor=false"  
         @showLoading="emit('showLoading')" 
-        @hideLoading="emit('hideLoading')"  juca
-        @refreshDatatable = "fetchData();emit('toRefreshExpressions');"   />
+        @hideLoading="emit('hideLoading')"  
+        @refreshDatatable = "fetchData();"   />
   </div>
-
 
 
 </div>
@@ -156,10 +154,10 @@
 <script setup>
 import { slidingMessage, forceHideToolTip , divStillVisible, scrollUntilElementVisible, improveTooltipLook } from '../assets/js/utils.js'
 import { onMounted, ref, watch  } from 'vue';
-import ExpressionForm from './ExpressionForm.vue';
+import FornecedorForm from './FornecedorForm.vue';
 
-const emit = defineEmits( ['showLoading', 'hideLoading','setDatatableToDisplay','toDisplayAbout', 'toRefreshtopMenu'] );
-const props = defineProps( ['currentViewedDatatable', 'currentBackend', 'backendUrl', 'imagesUrl', 'expressions' ] )
+const emit = defineEmits( ['showLoading', 'hideLoading' ] );
+const props = defineProps( ['currentViewedDatatable', 'backendUrl' ] )
 
 // registros que serao listados
 const records = ref(null)  
@@ -172,7 +170,7 @@ let columns = []
 
 let title = ''
 
-// se usuario pediu ver tabela fornecedores
+// usuario pediu ver tabela fornecedores
 if (props.currentViewedDatatable === 'fornecedores')   {
   columns.push({ fieldname: "id", width: "5%", title: 'Id', id: 'col1', boolean: false },
               { fieldname: "nome", width: "calc(75% - 150px)", title: 'Nome', id: 'col2', boolean: false},
@@ -180,6 +178,7 @@ if (props.currentViewedDatatable === 'fornecedores')   {
   title = 'Fornecedores'
 }
 
+// usuario pediu ver tabela fornecedores
 if (props.currentViewedDatatable === 'usuarios')   {
   columns.push({ fieldname: "id", width: "5%", title: 'Id', id: 'col1', boolean: false },
               { fieldname: "nome", width: "calc(25% - 150px)", title: 'Nome', id: 'col2', boolean: false},
@@ -216,6 +215,7 @@ const clearFilter = () => {
   filterApplied.value=false
 }
 //*****************************************************************************
+// linha (div) da datatable foi clicada, coloca em destaque
 //*****************************************************************************
 const rowClicked = (id) =>   {
   let tr = $(`#${id}`)
@@ -237,8 +237,6 @@ const focusSearchBox = (e) => {
 onMounted( () => {    
   improveTooltipLook()
 
-console.log('datatable')
-
   fetchData()
 })
 
@@ -258,18 +256,19 @@ watch([currentStatus, filterApplied], () => {
 async function fetchData() {
   emit('showLoading')
 
+  // zera altura da tabela para que jquery mais abaixo aumente o maximo possivel
+  // perdi quase 6 horas tentando fazer o tailwind aumentar sozinho, deve haver um jeito
+  // mas nao tenho mais tempo, outra hora resolvo
   $('#rowsContainer').height('0')
 
   // se a search box foi preenchida, leva em consideracao na busca
   // qual campo sera pesquisado, quem define é o backend
   // se search box especificada, ignora filtro ativo/inativo
 
-alert(props.currentViewedDatatable)
-
   let route = `${props.backendUrl}/${props.currentViewedDatatable}/${currentStatus.value}` 
 
-  let stringSearch = $.trim( $('#txtTableSearchText').val() )
   // concatena eventual search box
+  let stringSearch = $.trim( $('#txtTableSearchText').val() )
   route += (stringSearch!='' ? `/${stringSearch}` : '')
 
   filterApplied.value = stringSearch!='' ? true : false ;
@@ -359,7 +358,7 @@ async function changeStatus (id) {
 //*************************************************************************** 
 const deleteRecord = (id) => {
 
-  slidingMessage(props.expressions.unavailable_option, 3000)        
+  slidingMessage('deletar', 3000)        
 
 }
 

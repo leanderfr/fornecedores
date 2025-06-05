@@ -2,20 +2,20 @@
 <template>
 
 <!-- form container  -->
-<div  class="flex flex-col w-[95%] max-w-[1300px] overflow-hidden pt-8 "  id='expressionForm'>
+<div  class="flex flex-col w-[95%] max-w-[1300px] overflow-hidden pt-8 "  id='fornecedorForm'>
 
   <div  class="flex flex-col w-full bg-white relative rounded-lg"  >
 
-    <!-- title and close button  -->
+    <!-- titulo e botoes topo superior direito  -->
     <div id='divWINDOW_TOP'>
       
       <div id='divWINDOW_TITLE'>
 
         <div v-if="formHttpMethodApply=='POST'">
-          {{ expressions.new_expression }}
+          Novo Fornecedor
         </div>
         <div v-if="formHttpMethodApply=='PATCH'">
-          {{ expressions.edit_expression }}
+          Editar Fornecedor
         </div>
 
       </div>
@@ -29,24 +29,23 @@
             &nbsp;&nbsp;[ ? ]&nbsp;&nbsp;
           </div>
 
-          <div class='divWINDOW_BUTTON mr-6'  @click="emit('closeExpressionForm')"  aria-hidden="true" > 
+          <div class='divWINDOW_BUTTON mr-6'  @click="emit('closeForm')"  aria-hidden="true" > 
             &nbsp;&nbsp;[ X ]&nbsp;&nbsp;
           </div>
       </div>
     
     </div>
 
-    <!-- form fields below -->
+    <!-- campos do form -->
     <div class="flex flex-col w-full h-auto  px-4 my-6" >
 
-      <!-- the item itself, and its english/portuguese translations -->
       <div class="flex flex-row w-full gap-[10px] border-b-2 pb-4">
 
         <div class="flex flex-col w-full ">
           <div class="flex flex-row w-full pb-2  gap-6">   
-            <div class='w-1/2'>{{ expressions.field_item }}:</div>
-            <div class='w-1/2'>{{ expressions.field_english }}:</div>
-            <div class='w-1/2'>{{ expressions.field_portuguese }}</div>
+            <div class='w-1/2'>Nome:</div>
+            <div class='w-1/2'>CNPJ:</div>
+            <div class='w-1/2'>Nome Fantasia</div>
           </div>
 
           <div class="flex flex-row w-full pb-2 gap-6 ">  
@@ -72,9 +71,9 @@
 
     <!-- botoes salvar/sair -->
     <div class="flex flex-row w-full justify-between px-6 border-t-[1px] border-t-gray-300 py-2">
-      <button  id="btnCLOSE" class="btnCANCELAR" @click="emit('closeExpressionForm')" >{{ expressions.button_cancel }}</button>
+      <button  id="btnCLOSE" class="btnCANCELAR" @click="emit('closeExpressionForm')" >Esc= cancelar</button>
 
-      <button  id="btnSALVAR" class="btnSALVAR" @click="saveExpression()" aria-hidden="true">{{ expressions.button_save }}</button>
+      <button  id="btnSALVAR" class="btnSALVAR" @click="saveFornecedor()" aria-hidden="true">F2= salvar</button>
     </div>
 
   </div> 
@@ -87,33 +86,34 @@
 <script setup>
 import { onMounted, ref  } from 'vue';
 import { makeWindowDraggable, slidingMessage   } from '../assets/js/utils.js'
-const emit = defineEmits( ['showLoading', 'hideLoading', 'closeExpressionForm','refreshDatatable'] );
+const emit = defineEmits( ['showLoading', 'hideLoading', 'closeForm','refreshDatatable'] );
 
-const props = defineProps( ['expressions', 'backendUrl', 'currentBackend', 'formHttpMethodApply', 'currentId'] )
+const props = defineProps( ['backendUrl', 'formHttpMethodApply', 'currentId'] )
 
 onMounted( () => {
-  getExpressionFormPopulatedAndReady()
+  getFornecedorFormPopulatedAndReady()
 })
 
 //************************************************************************************************************************************************************
+// usuario clicou no icon '[ ? ]', canto superior direito do form
 //************************************************************************************************************************************************************
 const userNeedsHelp = () => {
-  slidingMessage(props.expressions.user_needs_help, 3000)
+  slidingMessage('Mensagem de auxílio para usuário...', 3000)
 }
 
 
 /************************************************************************************************************************************************************
-get data from the expression record
+fetch do registro atual
 ************************************************************************************************************************************************************/
-async function getExpressionFormPopulatedAndReady() { 
+async function getFornecedorFormPopulatedAndReady() { 
 
-  // if expression form was not called to record insertion, first fetch record data
+  // if o form nao foi chamado para insercao de registro, faz fetch do reg
   if ( props.formHttpMethodApply != 'POST')   {
 
     emit('showLoading')
 
     try {
-        let _route_ = `${props.backendUrl}/expression/${props.currentId}`
+        let _route_ = `${props.backendUrl}/fornecedor/${props.currentId}`
 
         await fetch(_route_, {method: 'GET'})
 
@@ -125,29 +125,27 @@ async function getExpressionFormPopulatedAndReady() {
           return response.json();
         })
 
-        .then( (expression) => {
+        .then( (registro) => {
           emit('hideLoading')
-          $('#txtItem').val( expression.item )
-          $('#txtEnglish').val( expression.english )
-          $('#txtPortuguese').val( expression.portuguese )
+          $('#txtRazao').val( registro.nome )
+          $('#txtCNPJ').val( registro.cnpj )
+          $('#txtFantasia').val( registro.fantasia )
 
-          putFocusInFirstInputText_AndOthersParticularitiesOfTheExpressionForm() 
-
-
+          preparaFormFornecedor() 
         })
 
 
     } 
     catch(err) {
       emit('hideLoading')
-      throw new Error(`Expression Prepare Err Fatal= ${err.message}`);
+      throw new Error(`Fornecedor Erro Fatal= ${err.message}`);
     }
 
   }
 
-  // expression form was called to add new record
+  // formulario foi chamado para add registro
   if ( props.formHttpMethodApply === 'POST')   {
-    putFocusInFirstInputText_AndOthersParticularitiesOfTheExpressionForm()
+    preparaFormFornecedor()
   }
 
 }
@@ -156,12 +154,13 @@ async function getExpressionFormPopulatedAndReady() {
 /************************************************************************************************************************************************************
 put focus first field and prepare masks
 ************************************************************************************************************************************************************/
-const putFocusInFirstInputText_AndOthersParticularitiesOfTheExpressionForm = () => { 
+const preparaFormFornecedor = () => { 
 
   setTimeout(() => {
-    $('#txtItem').focus()    
+    $('#txtRazao').focus()    
   }, 500);
 
+  // faz o form ser arrastavel
   makeWindowDraggable('divWINDOW_TOP', 'expressionForm')
 }
 
@@ -170,18 +169,18 @@ const putFocusInFirstInputText_AndOthersParticularitiesOfTheExpressionForm = () 
 
 
 /********************************************************************************************************************************************************
- validate data from the form and try to save it
+ valida dados no front end primeiramente
 ********************************************************************************************************************************************************/
-async function saveExpression()  {
+async function saveFornecedor()  {
 
   let error = ''
 
-  if ( $('#txtItem').val().trim().length < parseInt($('#txtItem').attr('minlength'), 10)  )  
-      error = props.expressions.missing_item + ' - Min '+$('#txtItem').attr('minlength')
-  if ( $('#txtEnglish').val().trim().length < parseInt($('#txtEnglish').attr('minlength'), 10) )  
-      error = props.expressions.missing_english + ' - Min '+$('#txtEnglish').attr('minlength')
-  if ( $('#txtPortuguese').val().trim().length < parseInt($('#txtPortuguese').attr('minlength'), 10) )  
-      error = props.expressions.missing_portuguese + ' - Min '+$('#txtPortuguese').attr('minlength')
+  if ( $('#txtRazao').val().trim().length < parseInt($('#txtRazao').attr('minlength'), 10)  )  
+      error = 'Preencha a razão social do fornecedor - Min '+$('#txtRazao').attr('minlength')
+//  if ( $('#txtCNPJ').val().trim().length < parseInt($('#txtCNPJ').attr('minlength'), 10) )  
+//      error = 'CNPJ inválido'
+  if ( $('#txtFantasia').val().trim().length < parseInt($('#txtFantasia').attr('minlength'), 10) )  
+      error = 'Preencha o nome fantasia - Min '+$('#txtFantasia').attr('minlength')
 
 
   // show any error detected
@@ -191,22 +190,26 @@ async function saveExpression()  {
   }
 
   var formData = new FormData(); 
-  formData.append('item', $('#txtItem').val())
-  formData.append('english', $('#txtEnglish').val())
-  formData.append('portuguese', $('#txtPortuguese').val())
+  formData.append('nome', $('#txtNome').val())
+  formData.append('cnpj', $('#txtCNPJ').val())
+  formData.append('fantasia', $('#txtFantasia').val())
 
-  let route = ''
-  if (props.formHttpMethodApply=='POST') 
-    route += 'expression'        
-  if (props.formHttpMethodApply=='PATCH') 
-    route += `expression/${props.currentId}`   
+  let route = '', acao = ''
+  if (props.formHttpMethodApply=='POST')  {
+    route += 'fornecedor'        
+    acao = 'Registro adicionado'
+  }
+  if (props.formHttpMethodApply=='PATCH')  {
+    route += `fornecedor/${props.currentId}`   
+    acao = 'Alteração feita'
+  }
 
   // formHttpMethodApply= POST, PATCH ou DELETE
   setTimeout(() => {
     emit('showLoading')    
   }, 10);
   
-  // PHP doesnt work well with PATCH (laravel does), need to send all with POST here
+  // insere ou edita reg
   await fetch(`${props.backendUrl}/${route}`, {method: props.formHttpMethodApply, body: formData})
 
   .then(response => {
@@ -216,10 +219,10 @@ async function saveExpression()  {
     return response.text()
   })
   .then((msg) => {
-    slidingMessage(props.expressions.expression_recorded, 1500)        
+    slidingMessage(acao, 1500)        
     emit('hideLoading')
     setTimeout(() => {
-      emit('closeExpressionForm')  
+      emit('closeForm')  
       emit('refreshDatatable')  
 
     }, 1700);
