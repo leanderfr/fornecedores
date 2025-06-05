@@ -20,3 +20,5 @@ frontend_vue/*.ntvs*
 frontend_vue/*.njsproj
 frontend_vue/*.sln
 frontend_vue/*.sw?
+
+backend_php/setup.php
