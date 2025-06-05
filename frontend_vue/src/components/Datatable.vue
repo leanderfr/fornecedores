@@ -359,6 +359,8 @@ async function changeStatus (id) {
 const deleteRecord = (id) => {
 
   slidingMessage('deletar', 3000)        
+  slidingMessage('deletar', 3000)        
+
 
 }
 
