@@ -107,7 +107,7 @@
                       :key="'1tr-'+index" 
                      :class="record.active==0 ? 'text-red-500 font-bold' : 'text-black'"  
                      class='datatableColumn'  >
-                    {{ record[column.fieldname] }} >
+                    {{ record[column.fieldname] }}
                   </div>
 
                   <!-- se a ultima coluna foi impressa e reg ativo, adiciona 3 icones de acao (editar, excluir, desativar ) -->
@@ -173,8 +173,8 @@ let title = ''
 // usuario pediu ver tabela fornecedores
 if (props.currentViewedDatatable === 'fornecedores')   {
   columns.push({ fieldname: "id", width: "5%", title: 'Id', id: 'col1', boolean: false },
-              { fieldname: "nome", width: "calc(75% - 150px)", title: 'Nome', id: 'col2', boolean: false},
-              { fieldname: "cpnj", width: "20%", title: 'CNPJ', id: 'col3', boolean: false} )
+              { fieldname: "razao_social", width: "calc(75% - 150px)", title: 'Razão Social', id: 'col2', boolean: false},
+              { fieldname: "cnpj", width: "20%", title: 'CNPJ', id: 'col3', boolean: false} )
   title = 'Fornecedores'
 }
 

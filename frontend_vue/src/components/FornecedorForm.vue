@@ -1,4 +1,5 @@
 
+
 <template>
 
 <!-- form container  -->
@@ -46,33 +47,60 @@
           <div class="flex flex-col basis-[150px] text-right mr-4">  
             <div class='h-[55px] pt-1 mb-5'>CNPJ:</div>
             <div class='h-[45px] pt-1'>Nome:</div>
-            <div class='h-[45px] pt-1'>Nome Fantasia:</div>          
+            <div class='h-[45px] pt-1'>Rua, Av.:</div>          
+            <div class='h-[45px] pt-1'>Número:</div>          
+            <div class='h-[45px] pt-1'>Bairro:</div>          
+            <div class='h-[45px] pt-1'>CEP:</div>          
+            <div class='h-[45px] pt-1'>Cidade:</div>          
+            <div class='h-[45px] pt-1'>UF:</div>          
+            <div class='h-[45px] pt-1'>País:</div>          
           </div>
 
           <div class="flex flex-col  grow max-w-[60%]">  
 
             <div class='h-[55px] mb-5'>
-              <input type="text" autocomplete="off" sequence="1"   id="txtCNPJ" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
+              <div>
+                <input type="text" autocomplete="off" sequence="1"   value='01122833000279' id="txtCNPJ" maxlength='18' minlength='18' @blur='verificaCNPJ' class='text_formFieldValue w-full'  >
+              </div>
+              <div id='cnpjERROR'></div>
             </div>
             <div class='h-[45px]'>
-              <input type="text" autocomplete="off" sequence="2"   id="txtRazao" maxlength='30' minlength='3' class='text_formFieldValue '  >  
+              <input type="text" autocomplete="off" sequence="2"   id="txtRazao_social" maxlength='150' minlength='5' class='text_formFieldValue' 
+                msgErro='Preencha a razão social' >  
             </div>
             <div class='h-[45px]'>
-              <input type="text" autocomplete="off" sequence="3"   id="txtFantasia" maxlength='200' minlength='3' class='text_formFieldValue w-[300px]'  >  
+              <input type="text" autocomplete="off" sequence="3"   id="txtLogradouro" maxlength='150' minlength='5' class='text_formFieldValue' 
+                msgErro='Preencha o logradouro' >  
             </div>
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="4"   id="txtNumero" maxlength='20' minlength='2' class='text_formFieldValue' 
+                msgErro='Preencha o número' >  
+            </div>
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="5"   id="txtBairro" maxlength='150' minlength='5' class='text_formFieldValue'  
+                msgErro='Preencha o bairro' >  
+            </div>
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="6"   id="txtCEP" maxlength='9' minlength='9' class='text_formFieldValue'  
+                  msgErro='Preencha o CEP' >  
+            </div>
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="7"   id="txtCidade" maxlength='150' minlength='5' class='text_formFieldValue'  
+                msgErro='Preencha a cidade' >    
+            </div>
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="8"   id="txtUF" maxlength='2' minlength='2' class='text_formFieldValue'  
+                msgErro='Preencha o Estado' >  
+            </div>
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="9"   id="txtPais" maxlength='150' minlength='5' class='text_formFieldValue'  
+                msgErro='Preencha o país' >  
+            </div>
+
 
           </div>
 
         </div>
-
-
-
-
-
-
-
-
-
 
 
       </div>
@@ -96,7 +124,7 @@
 
 <script setup>
 import { onMounted, ref  } from 'vue';
-import { makeWindowDraggable, slidingMessage   } from '../assets/js/utils.js'
+import { makeWindowDraggable, slidingMessage, cnpjOK, getNumbersFromString  } from '../assets/js/utils.js'
 const emit = defineEmits( ['showLoading', 'hideLoading', 'closeForm','refreshDatatable'] );
 
 const props = defineProps( ['backendUrl', 'formHttpMethodApply', 'currentId'] )
@@ -141,9 +169,15 @@ async function getFornecedorFormPopulatedAndReady() {
 
         .then( (registro) => {
           emit('hideLoading')
-          $('#txtRazao').val( registro.nome )
+          $('#txtRazao_social').val( registro.nome )
           $('#txtCNPJ').val( registro.cnpj )
-          $('#txtFantasia').val( registro.fantasia )
+          $('#txtLogradouro').val( registro.logradouro )
+          $('#txtNumero').val( registro.numero )  
+          $('#txtBairro').val( registro.bairro )  
+          $('#txtCEP').val( registro.cep.substring(0, 5) + '-' + registro.cep.substring(5, 8 )  )
+          $('#txtCidade').val( registro.cidade )  
+          $('#txtUF').val( registro.uf )  
+          $('#txtPais').val( registro.pais )  
 
           preparaFormFornecedor() 
         })
@@ -166,7 +200,7 @@ async function getFornecedorFormPopulatedAndReady() {
 
 
 /************************************************************************************************************************************************************
-put focus first field and prepare masks
+coloca foco no 1o campo e prepara mascaras
 ************************************************************************************************************************************************************/
 const preparaFormFornecedor = () => { 
 
@@ -178,6 +212,7 @@ const preparaFormFornecedor = () => {
   makeWindowDraggable('divWINDOW_TOP', 'fornecedorForm')
 
   $('#txtCNPJ').mask('00.000.000/0000-00', {reverse: true});
+  $('#txtCEP').mask('00000-000', {reverse: true});
 }
 
 
@@ -189,33 +224,41 @@ const preparaFormFornecedor = () => {
 ********************************************************************************************************************************************************/
 async function saveFornecedor()  {
 
-  let error = ''
-  let toFocus = ''
+  let cmpFocar = ''
+  let erroExibir = ''
 
-  if ( $('#txtRazao').val().trim().length < parseInt($('#txtRazao').attr('minlength'), 10)  )  {
-      error = 'Preencha a razão social do fornecedor - Mín '+$('#txtRazao').attr('minlength')
-      toFocus = 'txtRazao'
+  var formData = new FormData();  // body do request
+
+  // percorre campos para critica dos dados digitados
+  $("input[type='text']").each(function() {
+    
+    let vlr = $.trim( $(this).val() );
+    let minimo = parseInt($(this).attr('minlength'), 10)   // minlength, propriedade inventada por mim
+    let maximo = parseInt($(this).attr('maxlength'), 10) 
+
+    // msgErro, propriedade inventada para auxiliar
+    let erroMsg = $(this).attr('msgErro')  
+      + '&nbsp;&nbsp;&nbsp;Mín.: '+minimo+   
+      + '&nbsp;&nbsp;&nbsp;Máx.: '+maximo
+
+    let cmpJSON = $(this).attr('id')   
+    cmpJSON = cmpJSON.replace('txt','').toLowerCase();
+
+    if ( vlr.length < minimo || vlr.length > maximo )   {
+      erroExibir = erroMsg 
+      cmpFocar = $(this).attr('id')
+
+      return false
+    }
+
+    formData.append(cmpJSON, vlr)    
+console.log(cmpJSON+': '+vlr)
+  });
+
+  if (erroExibir!='') {
+    slidingMessage(erroExibir, 3000)
+    return false;
   }
-//  if ( $('#txtCNPJ').val().trim().length < parseInt($('#txtCNPJ').attr('minlength'), 10) )  
-//      error = 'CNPJ inválido'
-  if ( $('#txtFantasia').val().trim().length < parseInt($('#txtFantasia').attr('minlength'), 10) )   {
-      error = 'Preencha o nome fantasia - Mín '+$('#txtFantasia').attr('minlength')
-      toFocus = 'txtFantasia'
-  }
-
-
-  // show any error detected
-  if (error!='') {
-    slidingMessage(error, 3000)
-    $(`#${toFocus}`).focus()    
-    return;
-  }
-
-  var formData = new FormData(); 
-  formData.append('razao_social', $('#txtRazao').val())
-  formData.append('cnpj', $('#txtCNPJ').val())
-  formData.append('nome_fantasia', $('#txtFantasia').val())
-
   let route = '', acao = ''
   if (props.formHttpMethodApply=='POST')  {
     route += 'fornecedor'        
@@ -254,9 +297,72 @@ async function saveFornecedor()  {
     emit('hideLoading')
     slidingMessage(error, 3000)        
   })  
+}
+
+/************************************************************************************************************************************************************
+auxilia no preenchimento dos campos baseado no CNPJ digitado
+************************************************************************************************************************************************************/
+async function cnpjAuxiliarPreenchimento()  { 
+
+  emit('showLoading')
+
+  let cnpj = getNumbersFromString(  $.trim($('#txtCNPJ').val())  )
+
+  try {
+      let _route_ = `https://open.cnpja.com/office/${cnpj}`
+
+      await fetch(_route_, {method: 'GET'})
+
+      .then( (response) => {
+        if (!response.ok) {
+          return response.text().then(text => {throw new Error(`HTTP error! ${response.status}` + text)})
+        }
+        return response.json();
+      })
+
+      .then( (registro) => {
+        emit('hideLoading')
+        $('#txtRazao_social').val( registro.company.name )
+        $('#txtLogradouro').val( registro.address.street )
+        $('#txtLogradouro').val( registro.address.street )
+        $('#txtNumero').val( registro.address.number )  
+        $('#txtBairro').val( registro.address.district )  
+        $('#txtCidade').val( registro.address.city )  
+        $('#txtCEP').val( registro.address.zip.substring(0, 5) + '-' + registro.address.zip.substring(5, 8 )  )
+        $('#txtUF').val( registro.address.state )  
+        $('#txtPais').val( registro.address.country.name )  
+
+
+      })
+
+  } 
+  catch(err) {
+    emit('hideLoading')
+    slidingMessage(`Erro API CNPJ= &nbsp;&nbsp;&nbsp;<strong>${err.message}</strong>`, 3000);  
+  }
 
 }
 
 
+/********************************************************************************************************************************************************
+ valida dados no front end primeiramente 
+********************************************************************************************************************************************************/
+const verificaCNPJ = () => {
+
+$('#cnpjERROR').html('')
+
+let cnpj = getNumbersFromString(  $.trim($('#txtCNPJ').val())  )
+
+if (cnpj=='') return
+
+if (! cnpjOK(cnpj) ) {
+  $('#cnpjERROR').html('CNPJ inválido')
+}
+
+cnpjAuxiliarPreenchimento()
+
+}
+
+//01122833000279
 
 </script>

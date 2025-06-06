@@ -555,3 +555,9 @@ display:flex;
 .iconeBackend {
 @apply flex flex-col justify-center items-center  ;
 }
+
+#cnpjERROR {
+margin-top:10px;
+color:red;
+font-weight:  bold;;
+}

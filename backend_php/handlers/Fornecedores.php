@@ -8,13 +8,13 @@ class Fornecedores
 
   public function getFornecedores(string $status, string $searchbox): void   {
 
-    $sql =  "select id, razao_social, nome_fantasia, cnpj, ifnull(active, false) as active ".
+    $sql =  "select id, razao_social, cnpj, logradouro, numero, bairro, cep, cidade, uf, pais, ifnull(active, false) as active ".
             "from fornecedores  ".
             "where deleted_at is null ";
 
     // prioridade é filtrar baseado na searchbox enviada
     if ($searchbox!='')  {
-      $sql .= "and trim(nome) like('%$searchbox%') or trim(razao_social) like('%$searchbox%') ";
+      $sql .= "and trim(razao_social) like('%$searchbox%') or trim(razao_social) like('%$searchbox%') ";
     } 
 
     // searchbox vazia, filtra pelo status 
@@ -32,7 +32,7 @@ class Fornecedores
   //***************************************************************************************************************************************
 
   public function getFornecedorById($id): void   {
-    $sql =  "select nome_fantasia, cpnj, razao_social  ".
+    $sql =  "select razao_social, cpnj, logradouro, numero, bairro, cep, cidade, uf, pais, ifnull(active, false) as active ".
             "from fornecedores  ".
             "where id=$id ";
 
@@ -73,9 +73,15 @@ class Fornecedores
   	if ($fornecedor_id!='' && ! is_numeric($fornecedor_id))   routeError();
 
     // verify request
-    $fields = [ ['string', 'razao_social', 5, 30]  ,
-                ['string', 'cnpj', 3, 200],
-                ['string', 'nome_fantasia', 3, 200] 
+    $fields = [ ['string', 'razao_social', 5, 150]  ,
+                ['string', 'cnpj', 18, 18],
+                ['string', 'logradouro', 5, 150],
+                ['string', 'numero', 2, 20],
+                ['string', 'bairro', 5, 150],
+                ['string', 'cep', 9, 9],
+                ['string', 'cidade', 5, 150],
+                ['string', 'uf', 2, 2],
+                ['string', 'cep', 5, 150],
               ];
 
     // se é POST, obtem dados usando o conhecido $_POST 
@@ -123,18 +129,27 @@ class Fornecedores
 
     $razao_social =   addslashes($_FIELDS['razao_social']);
     $cnpj =   addslashes($_FIELDS['cnpj']);
-    $nome_fantasia =   addslashes($_FIELDS['nome_fantasia']);
+    $logradouro =   addslashes($_FIELDS['logradouro']);
+    $numero =   addslashes($_FIELDS['numero']);
+    $cep =   addslashes($_FIELDS['cep']);
+    $bairro =   addslashes($_FIELDS['bairro']);
+    $cidade =   addslashes($_FIELDS['cidade']);
+    $uf =   addslashes($_FIELDS['uf']);
+    $pais =   addslashes($_FIELDS['pais']);
+
 
     // se ID nao informado , é POST
     if ($fornecedor_id=='')    {
-      $crudSql = "insert into fornecedores(razao_social, cpnj, nome_fantasia, created_at, updated_at, active) ". 
-                "select '$razao_social', '$cnpj', '$nome_fantasia', now(), now(), true "; 
+      $crudSql = "insert into fornecedores(razao_social, cnpj, logradouro, numero, bairro, cep, cidade, uf, pais, created_at, updated_at, active) ". 
+                "select '$razao_social', '$cnpj', '$logradouro', '$numero', '$cep', '$bairro', '$cidade', '$uf', '$pais', now(), now(), true "; 
       $dbOperation = 'insert';
     }
 
     // se ID informado, é PATCH
     else { 
-      $crudSql = "update fornecedores set razao_social='$razao_social', cpnj='$cnpj', nome_fantasia='$nome_fantasia', updated_at=now() ". 
+      $crudSql = "update fornecedores set razao_social='$razao_social', cpnj='$cnpj', logradouro='$logradouro', ".
+                 "       numero='$numero', cep='$cep', bairro='$bairro', cidade='$cidade', uf='$uf', pais='$pais', ".
+                 " updated_at=now() ". 
                 "where id = $fornecedor_id ";
       $dbOperation = 'update';
     } 
