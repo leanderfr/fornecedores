@@ -41,27 +41,38 @@
 
       <div class="flex flex-row w-full gap-[10px] border-b-2 pb-4">
 
-        <div class="flex flex-col w-full ">
-          <div class="flex flex-row w-full pb-2  gap-6">   
-            <div class='w-1/2'>Nome:</div>
-            <div class='w-1/2'>CNPJ:</div>
-            <div class='w-1/2'>Nome Fantasia</div>
+        <div class="flex flex-row w-full ">
+
+          <div class="flex flex-col basis-[150px] text-right mr-4">  
+            <div class='h-[55px] pt-1 mb-5'>CNPJ:</div>
+            <div class='h-[45px] pt-1'>Nome:</div>
+            <div class='h-[45px] pt-1'>Nome Fantasia:</div>          
           </div>
 
-          <div class="flex flex-row w-full pb-2 gap-6 ">  
-            <div class='w-1/3'>
-              <input type="text" autocomplete="off" sequence="1"   id="txtRazao" maxlength='30' minlength='3' class='text_formFieldValue w-full'  >  
+          <div class="flex flex-col  grow max-w-[60%]">  
+
+            <div class='h-[55px] mb-5'>
+              <input type="text" autocomplete="off" sequence="1"   id="txtCNPJ" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
             </div>
-            <div class='w-1/3'>
-              <input type="text" autocomplete="off" sequence="2"   id="txtCNPJ" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="2"   id="txtRazao" maxlength='30' minlength='3' class='text_formFieldValue '  >  
             </div>
-            <div class='w-1/3'>
-              <input type="text" autocomplete="off" sequence="3"   id="txtFantasia" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
+            <div class='h-[45px]'>
+              <input type="text" autocomplete="off" sequence="3"   id="txtFantasia" maxlength='200' minlength='3' class='text_formFieldValue w-[300px]'  >  
             </div>
 
           </div>
 
         </div>
+
+
+
+
+
+
+
+
+
 
 
       </div>
@@ -160,11 +171,13 @@ put focus first field and prepare masks
 const preparaFormFornecedor = () => { 
 
   setTimeout(() => {
-    $('#txtRazao').focus()    
-  }, 500);
+    $('#txtCNPJ').focus()    
+  }, 100);
 
   // faz o form ser arrastavel
   makeWindowDraggable('divWINDOW_TOP', 'fornecedorForm')
+
+  $('#txtCNPJ').mask('00.000.000/0000-00', {reverse: true});
 }
 
 
@@ -180,13 +193,13 @@ async function saveFornecedor()  {
   let toFocus = ''
 
   if ( $('#txtRazao').val().trim().length < parseInt($('#txtRazao').attr('minlength'), 10)  )  {
-      error = 'Preencha a razão social do fornecedor - Min '+$('#txtRazao').attr('minlength')
+      error = 'Preencha a razão social do fornecedor - Mín '+$('#txtRazao').attr('minlength')
       toFocus = 'txtRazao'
   }
 //  if ( $('#txtCNPJ').val().trim().length < parseInt($('#txtCNPJ').attr('minlength'), 10) )  
 //      error = 'CNPJ inválido'
   if ( $('#txtFantasia').val().trim().length < parseInt($('#txtFantasia').attr('minlength'), 10) )   {
-      error = 'Preencha o nome fantasia - Min '+$('#txtFantasia').attr('minlength')
+      error = 'Preencha o nome fantasia - Mín '+$('#txtFantasia').attr('minlength')
       toFocus = 'txtFantasia'
   }
 
