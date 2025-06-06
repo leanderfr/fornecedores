@@ -200,8 +200,10 @@
       prepareLoadingAnimation()
 
       menuItens.value = [
-        {id: 'fornecedores', titulo: 'Fornecedores', icone: 'fornecedores.svg'},
-        {id: 'usuarios', titulo: 'Usuários', icone: 'usuarios.svg'}
+        {id: 'fornecedores', titulo: 'Fornecedores', 
+          icone: 'http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com/hiringmachine/externalJS/fornecedores.svg'},
+        {id: 'usuarios', titulo: 'Usuários', 
+          icone: 'http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com/hiringmachine/externalJS/usuarios.svg'}
       ]
 
       isLoading.value = true

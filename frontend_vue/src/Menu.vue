@@ -6,7 +6,7 @@
     <!-- itens do menu -->
     <div v-for='item in props.menuItens' :id="'itemMenu' + item.id" class='itemMenu' :class='{itemMenuSelected: props.selectedMenuItem==item.id}'  :key='item.id' 
         :style="{ 
-          backgroundImage: `url(src/assets/images/${item.icone}`,   
+          backgroundImage: `url(${item.icone}`,   
           backgroundRepeat: 'no-repeat',
           backgroundPositionY: 'center'  ,
           backgroundPositionX: '10px',
