@@ -220,7 +220,7 @@ align-items: center;
 }
 
 .itemMenu {
-  @apply bg-[#E6F0FF] hover:border-gray-700 hover:border-[3px] cursor-pointer justify-center pl-[10%]
+  @apply bg-[#E6F0FF] hover:border-gray-700 hover:border-[3px] cursor-pointer justify-center pl-[90px]
       border-transparent border-[3px] flex flex-col h-full w-[230px]   text-gray-500
 }
 .itemMenuSelected { 

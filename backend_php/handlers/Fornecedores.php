@@ -32,7 +32,7 @@ class Fornecedores
   //***************************************************************************************************************************************
 
   public function getFornecedorById($id): void   {
-    $sql =  "select razao_social, cpnj, logradouro, numero, bairro, cep, cidade, uf, pais, ifnull(active, false) as active ".
+    $sql =  "select razao_social, cnpj, logradouro, numero, bairro, cep, cidade, uf, pais, ifnull(active, false) as active ".
             "from fornecedores  ".
             "where id=$id ";
 
@@ -141,13 +141,13 @@ class Fornecedores
     // se ID nao informado , é POST
     if ($fornecedor_id=='')    {
       $crudSql = "insert into fornecedores(razao_social, cnpj, logradouro, numero, bairro, cep, cidade, uf, pais, created_at, updated_at, active) ". 
-                "select '$razao_social', '$cnpj', '$logradouro', '$numero', '$cep', '$bairro', '$cidade', '$uf', '$pais', now(), now(), true "; 
+                "select '$razao_social', '$cnpj', '$logradouro', '$numero', '$bairro', '$cep', '$cidade', '$uf', '$pais', now(), now(), true "; 
       $dbOperation = 'insert';
     }
 
     // se ID informado, é PATCH
     else { 
-      $crudSql = "update fornecedores set razao_social='$razao_social', cpnj='$cnpj', logradouro='$logradouro', ".
+      $crudSql = "update fornecedores set razao_social='$razao_social', cnpj='$cnpj', logradouro='$logradouro', ".
                  "       numero='$numero', cep='$cep', bairro='$bairro', cidade='$cidade', uf='$uf', pais='$pais', ".
                  " updated_at=now() ". 
                 "where id = $fornecedor_id ";

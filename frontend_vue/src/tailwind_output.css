@@ -831,10 +831,6 @@ video {
   width: 230px;
 }
 
-.w-\[300px\] {
-  width: 300px;
-}
-
 .w-\[400px\] {
   width: 400px;
 }
@@ -1401,8 +1397,8 @@ video {
   padding-left: 2.25rem;
 }
 
-.pl-\[10\%\] {
-  padding-left: 10%;
+.pl-\[90px\] {
+  padding-left: 90px;
 }
 
 .pr-2 {
@@ -1829,7 +1825,7 @@ input:checked + .slider_backend:before {
   border-color: transparent;
   --tw-bg-opacity: 1;
   background-color: rgb(230 240 255 / var(--tw-bg-opacity, 1));
-  padding-left: 10%;
+  padding-left: 90px;
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }

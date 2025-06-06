@@ -60,7 +60,8 @@
 
             <div class='h-[55px] mb-5'>
               <div>
-                <input type="text" autocomplete="off" sequence="1"   value='01122833000279' id="txtCNPJ" maxlength='18' minlength='18' @blur='verificaCNPJ' class='text_formFieldValue w-full'  >
+                <input type="text" autocomplete="off" sequence="1"   id="txtCNPJ" maxlength='18' minlength='18' @blur='verificaCNPJ' class='text_formFieldValue w-full'  
+                  msgErro='Preencha o CNPJ' >  
               </div>
               <div id='cnpjERROR'></div>
             </div>
@@ -125,7 +126,7 @@
 <script setup>
 import { onMounted, ref  } from 'vue';
 import { makeWindowDraggable, slidingMessage, cnpjOK, getNumbersFromString  } from '../assets/js/utils.js'
-const emit = defineEmits( ['showLoading', 'hideLoading', 'closeForm','refreshDatatable'] );
+const emit = defineEmits( ['showLoading', 'hideLoading', 'closeForm','refreshDatatable', 'setCurrentId'] );
 
 const props = defineProps( ['backendUrl', 'formHttpMethodApply', 'currentId'] )
 
@@ -169,12 +170,15 @@ async function getFornecedorFormPopulatedAndReady() {
 
         .then( (registro) => {
           emit('hideLoading')
-          $('#txtRazao_social').val( registro.nome )
+
+          let cep = registro.cep.padEnd(9, " ");
+        
+          $('#txtRazao_social').val( registro.razao_social )
           $('#txtCNPJ').val( registro.cnpj )
           $('#txtLogradouro').val( registro.logradouro )
           $('#txtNumero').val( registro.numero )  
           $('#txtBairro').val( registro.bairro )  
-          $('#txtCEP').val( registro.cep.substring(0, 5) + '-' + registro.cep.substring(5, 8 )  )
+          $('#txtCEP').val( cep.substring(0, 6) + '-' + cep.substring(5, 9 )  )
           $('#txtCidade').val( registro.cidade )  
           $('#txtUF').val( registro.uf )  
           $('#txtPais').val( registro.pais )  
@@ -205,7 +209,14 @@ coloca foco no 1o campo e prepara mascaras
 const preparaFormFornecedor = () => { 
 
   setTimeout(() => {
-    $('#txtCNPJ').focus()    
+    // se esta inserindo reg, cai no campo cnpj para auxiliar usuario a procurar dados da empresa via API
+    if ( props.formHttpMethodApply == 'POST')   
+      $('#txtCNPJ').focus()    
+
+    // se esta editando reg, cai no razao social pois CNPJ nao precisa ser pesquisado novamente
+    else 
+      $('#txtRazao_social').focus()    
+
   }, 100);
 
   // faz o form ser arrastavel
@@ -214,8 +225,6 @@ const preparaFormFornecedor = () => {
   $('#txtCNPJ').mask('00.000.000/0000-00', {reverse: true});
   $('#txtCEP').mask('00000-000', {reverse: true});
 }
-
-
 
 
 
@@ -233,30 +242,28 @@ async function saveFornecedor()  {
   $("input[type='text']").each(function() {
     
     let vlr = $.trim( $(this).val() );
-    let minimo = parseInt($(this).attr('minlength'), 10)   // minlength, propriedade inventada por mim
-    let maximo = parseInt($(this).attr('maxlength'), 10) 
+    let minimo = $(this).attr('minlength')   // minlength, propriedade inventada para facilitar
+    let maximo = $(this).attr('maxlength')
 
     // msgErro, propriedade inventada para auxiliar
-    let erroMsg = $(this).attr('msgErro')  
-      + '&nbsp;&nbsp;&nbsp;Mín.: '+minimo+   
-      + '&nbsp;&nbsp;&nbsp;Máx.: '+maximo
+    let erroMsg = $(this).attr('msgErro') + ' - Mín.: '+minimo+ ' - Máx.: '+maximo
 
     let cmpJSON = $(this).attr('id')   
     cmpJSON = cmpJSON.replace('txt','').toLowerCase();
 
-    if ( vlr.length < minimo || vlr.length > maximo )   {
+    if ( vlr.length < parseInt(minimo, 10) || vlr.length > parseInt(maximo, 10) )   {
       erroExibir = erroMsg 
       cmpFocar = $(this).attr('id')
 
       return false
     }
-
+    // vai montando body do request
     formData.append(cmpJSON, vlr)    
-console.log(cmpJSON+': '+vlr)
   });
 
   if (erroExibir!='') {
     slidingMessage(erroExibir, 3000)
+    $(`#${cmpFocar}`).focus()
     return false;
   }
   let route = '', acao = ''
@@ -287,6 +294,15 @@ console.log(cmpJSON+': '+vlr)
     slidingMessage(acao, 1500)        
     emit('hideLoading')
     setTimeout(() => {
+
+      // qdo reg inserido com sucesso, retorna string => __successo__|id reg criado
+      if ( props.formHttpMethodApply=='POST' ) {
+        let currentId = msg.split('|')[1]  // id recem gravado 
+        emit('setCurrentId', currentId)    // devolve para Datatable o ID do reg recem criado
+      }
+
+
+
       emit('closeForm')  
       emit('refreshDatatable')  
 
@@ -331,8 +347,6 @@ async function cnpjAuxiliarPreenchimento()  {
         $('#txtCEP').val( registro.address.zip.substring(0, 5) + '-' + registro.address.zip.substring(5, 8 )  )
         $('#txtUF').val( registro.address.state )  
         $('#txtPais').val( registro.address.country.name )  
-
-
       })
 
   } 
@@ -357,6 +371,7 @@ if (cnpj=='') return
 
 if (! cnpjOK(cnpj) ) {
   $('#cnpjERROR').html('CNPJ inválido')
+  return
 }
 
 cnpjAuxiliarPreenchimento()

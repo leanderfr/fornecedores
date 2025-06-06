@@ -142,6 +142,7 @@
         @closeForm="exibirFormFornecedor=false"  
         @showLoading="emit('showLoading')" 
         @hideLoading="emit('hideLoading')"  
+        @setCurrentId='setCurrentId'
         @refreshDatatable = "fetchData();"   />
   </div>
 
@@ -206,6 +207,14 @@ const showTipSearchbox = ref(false)
 // tem filtro aplicado no exato momento?
 const filterApplied = ref(false)  
 
+
+
+//*****************************************************************************
+//*****************************************************************************
+const setCurrentId = (id) => {
+console.log('id='+id)
+  currentId.value = id
+}
 
 
 //*****************************************************************************

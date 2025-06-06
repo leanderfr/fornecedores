@@ -163,7 +163,7 @@ export const scrollUntilElementVisible = (element_id) => {
   element.scrollIntoView();
 
   let posY = container_div.scrollTop();
-  container_div.scrollTop(posY - 15); // rola um pouco pra cima porque scrollIntoView exagera quando desce
+  container_div.scrollTop(posY ); // rola um pouco pra cima porque scrollIntoView exagera quando desce
 }
 
 

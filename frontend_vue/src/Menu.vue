@@ -9,7 +9,7 @@
           backgroundImage: `url(src/assets/images/${item.icone}`,   
           backgroundRepeat: 'no-repeat',
           backgroundPositionY: 'center'  ,
-          backgroundPositionX: '10%',
+          backgroundPositionX: '10px',
 
         }"
         @click="emit('setMenuItem', item.id)"   >
