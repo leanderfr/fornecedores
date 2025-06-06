@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreFornecedorRequest;
-use App\Http\Resources\FornecedorResource;
-use App\Models\Fornecedor;
+use App\Http\Requests\StoreUsuarioRequest;
+use App\Http\Resources\UsuarioResource;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
-class FornecedorController extends Controller
+class UsuarioController extends Controller
 {
     //*********************************************************************************
     //*********************************************************************************
@@ -20,52 +20,52 @@ class FornecedorController extends Controller
 
         // prioridade é pesquisar a searchbox
         if ($searchbox!='')  {
-          $fornecedores = Fornecedor::where('razao_social', 'like', "%$searchbox%")->get();
+          $usuarios = Usuario::where('nome', 'like', "%$searchbox%")->get();
         } 
 
         // filtra por ativo/inativo se foi passado
         else { 
           $status = request()->route('status');
           if ($status=='active') {
-            $fornecedores = Fornecedor::where('active', true)->get();
+            $usuarios = Usuario::where('active', true)->get();
           }
           else if ($status=='inactive') {
-            $fornecedores = Fornecedor::where('active', false)->get();
+            $usuarios = Usuario::where('active', false)->get();
           }
           else  {
-            $fornecedores = Fornecedor::all();
+            $usuarios = Usuario::all();
           }
 
         }
 
-        return FornecedorResource::collection($fornecedores);
+        return UsuarioResource::collection($usuarios);
     }
 
     //*********************************************************************************
     //*********************************************************************************
 
-    public function store(StoreFornecedorRequest  $request)
+    public function store(StoreUsuarioRequest  $request)
     {
-        $fornecedor = Fornecedor::create($request->validated());
-        return new FornecedorResource($fornecedor);
+        $usuario = Usuario::create($request->validated());
+        return new UsuarioResource($usuario);
     }
 
     //*********************************************************************************
     //*********************************************************************************
 
-    public function update(StoreFornecedorRequest $request, Fornecedor $fornecedor)
+    public function update(StoreUsuarioRequest $request, Usuario $usuario)
     {
 
-      $fornecedor->update($request->validate());
-      return new FornecedorResource($fornecedor);
+      $usuario->update($request->validate());
+      return new UsuarioResource($usuario);
         
     }
 
     //*********************************************************************************
     //*********************************************************************************
-    public function destroy(Fornecedor $fornecedor)
+    public function destroy(Usuario $usuario)
     {
-        $fornecedor->delete();
+        $usuario->delete();
         return response(null, 204);
     }
 }

@@ -18,6 +18,7 @@ class FornecedorResource extends JsonResource
 
         return [
           'id' => $this->id,
+          'active' => $this->active,
           'cnpj' => $this->cnpj,
           'razao_social' => $this->razao_social,
           'logradouro' => $this->logradouro,

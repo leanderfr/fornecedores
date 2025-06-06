@@ -129,7 +129,7 @@
 
   // backend depende da escolha do usuario e se esta rodando local ou na AWS
   //const backendUrl = ref('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8073')  
-  const backendUrl = ref('http://localhost')  
+  const backendUrl = ref('http://localhost:8082')  
 
   // opcao do menu atual
   const selectedMenuItem = ref(0)

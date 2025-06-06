@@ -16,6 +16,12 @@ Route::get('/user', function (Request $request) {
 
 Route::get('fornecedores', 'App\Http\Controllers\FornecedorController@index');
 Route::get('fornecedores/{status}/{searchbox}', 'App\Http\Controllers\FornecedorController@index');
+Route::get('fornecedores/{status}', 'App\Http\Controllers\FornecedorController@index');
+
+Route::get('usuarios', 'App\Http\Controllers\UsuarioController@index');
+Route::get('usuarios/{status}/{searchbox}', 'App\Http\Controllers\UsuarioController@index');
+Route::get('usuarios/{status}', 'App\Http\Controllers\UsuarioController@index');
+
 
 //$router->Get("/fornecedores/{status}/{searchbox}", function($status, $searchbox) use($handlerFornecedores) {  
 
