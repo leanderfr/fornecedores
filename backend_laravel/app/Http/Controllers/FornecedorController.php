@@ -43,6 +43,7 @@ class FornecedorController extends Controller
         //return response()->json(new FornecedorResource($fornecedores));
     }
 
+
     //*********************************************************************************
     //*********************************************************************************
     public function getById()
@@ -68,6 +69,8 @@ class FornecedorController extends Controller
 
     public function update(StoreFornecedorRequest $request, Fornecedor $fornecedor)
     {
+
+die('lçjkdslçjkdslçk');
 
       $fornecedor->update($request->validate());
       return new FornecedorResource($fornecedor);

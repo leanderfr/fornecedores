@@ -283,7 +283,11 @@ async function salvarFornecedor()  {
   }, 10);
   
   // insere ou edita reg
-  await fetch(`${props.backendUrl}/${route}`, {method: props.formHttpMethodApply, body: formData})
+  await fetch(`${props.backendUrl}/${route}`, 
+            {method: props.formHttpMethodApply, 
+            body: formData,
+            "Accept": "application/json",
+              })
 
   .then(response => {
     if (!response.ok) {
