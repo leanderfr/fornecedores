@@ -127,9 +127,9 @@
   const isLoading = ref(true)
   const error = ref(null)
 
-  // backend depende da escolha do usuario e se esta rodando local ou na AWS
-  //const backendUrl = ref('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8073')  
-  const backendUrl = ref('http://localhost:8082')  
+  // backend depende da escolha do usuario e se esta rodando local ou na AWS, inicia com PHP (container porta 8073)
+  const backendUrl = ref('http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8073')  
+  //const backendUrl = ref('http://localhost:8082')  
 
   // opcao do menu atual
   const selectedMenuItem = ref(0)
@@ -213,7 +213,17 @@
   // isso se alguma datatable estiver sendo exibida, claro
   //*************************************************************************** 
   watch([isLaravelSelected], () => { 
-      isLoading.value = true;
+      //isLoading.value = true;
+
+      // backend PHP na AWS
+      if ( ! isLaravelSelected.value )
+          backendUrl.value = 'http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8073'
+
+      // backend Laravel na AWS
+      if ( isLaravelSelected.value )
+          backendUrl.value = 'http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8075'
+          //backendUrl.value = 'http://127.0.0.1:8072'
+
 
       // componentes afetados
       toRefreshDatatable.value++

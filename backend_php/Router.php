@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 class Router
-{
+{   
     private array $routes = [];
 
     public function Get(string $path, Closure $handler): void

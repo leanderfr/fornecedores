@@ -13,6 +13,8 @@ RUN a2enmod rewrite
 
 EXPOSE 80
 
+# docker system prune --all --volumes
+
 # docker build -t revendamais_backend_php .
 
 # docker run -d -p 8073:80 revendamais_backend_php
