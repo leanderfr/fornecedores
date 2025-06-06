@@ -54,7 +54,7 @@
               <!-- exibe/esconde registros ativos -->
               <div v-if="currentStatus=='active'" class='btnTABLE_ONLY_ACTIVE_RECORDS_ON putPrettierTooltip' 
                       title='Somente ativos'
-                      @click="forceHideToolTip();currentStatus=''" 
+                      @click="forceHideToolTip();currentStatus='all'" 
                       aria-hidden="true"></div>   
 
               <div v-else class='btnTABLE_ONLY_ACTIVE_RECORDS_OFF putPrettierTooltip' 

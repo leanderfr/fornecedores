@@ -113,7 +113,7 @@ class Fornecedores
       // larguras min / max 
       if ($fieldType=='string') {
           if ( strlen($fieldValue) < $minSize || strlen($fieldValue) > $maxSize )  {
-            $dataError = $fieldName . ' - Tamanho string errado';
+            $dataError = ' - <strong>' .strtoupper($fieldName) . ' - Tamanho string errado </strong>';
             break;
           }
       }

@@ -84,7 +84,7 @@ if ($patchRequest) {
 // adiciona registro (POST)
 if ($postRequest)  {
 
-    $router->Post("/developer", function() use($handlerFornecedores)  {  
+    $router->Post("/fornecedor", function() use($handlerFornecedores)  {  
       $handlerFornecedores->postOuPatchFornecedor();
     });
 

@@ -807,12 +807,8 @@ video {
   width: 1.75rem;
 }
 
-.w-\[150px\] {
-  width: 150px;
-}
-
-.w-\[170px\] {
-  width: 170px;
+.w-\[200px\] {
+  width: 200px;
 }
 
 .w-\[230px\] {
@@ -1248,7 +1244,7 @@ video {
 }
 
 .bg-icone-cancelar {
-  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='black' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
+  background-image: url("data:image/svg+xml,<svg width='22px' height='22px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='black' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
 }
 
 .bg-icone-excluir {
@@ -1951,14 +1947,14 @@ buttons
 
 button.btnCANCELAR {
   height: 30px;
-  width: 150px;
+  width: 200px;
   cursor: pointer;
   border-radius: 6px;
   border-width: 1px;
   border-color: transparent;
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
-  background-image: url("data:image/svg+xml,<svg width='18px' height='18px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='black' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
+  background-image: url("data:image/svg+xml,<svg width='22px' height='22px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='black'><g id='SVGRepo_bgCarrier' stroke-width='0'></g><g id='SVGRepo_tracerCarrier' stroke-linecap='round' stroke-linejoin='round'></g><g id='SVGRepo_iconCarrier'> <title>cancel</title> <g id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'> <g id='work-case' fill='black' transform='translate(91.520000, 91.520000)'> <polygon id='Close' points='328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48'> </polygon> </g> </g> </g></svg>");
   background-size: auto;
   background-position: left 10px center;
   background-repeat: no-repeat;
@@ -1976,7 +1972,7 @@ button.btnCANCELAR:hover {
 button.btnSALVAR {
   /* icone-salvar is defined in tailwind.config.js */
   height: 30px;
-  width: 170px;
+  width: 200px;
   cursor: pointer;
   border-radius: 6px;
   border-width: 1px;

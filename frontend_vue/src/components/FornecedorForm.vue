@@ -50,13 +50,13 @@
 
           <div class="flex flex-row w-full pb-2 gap-6 ">  
             <div class='w-1/3'>
-              <input type="text" autocomplete="off" sequence="1"   id="txtItem" maxlength='30' minlength='3' class='text_formFieldValue w-full'  >  
+              <input type="text" autocomplete="off" sequence="1"   id="txtRazao" maxlength='30' minlength='3' class='text_formFieldValue w-full'  >  
             </div>
             <div class='w-1/3'>
-              <input type="text" autocomplete="off" sequence="2"   id="txtEnglish" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
+              <input type="text" autocomplete="off" sequence="2"   id="txtCNPJ" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
             </div>
             <div class='w-1/3'>
-              <input type="text" autocomplete="off" sequence="3"   id="txtPortuguese" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
+              <input type="text" autocomplete="off" sequence="3"   id="txtFantasia" maxlength='200' minlength='3' class='text_formFieldValue w-full'  >  
             </div>
 
           </div>
@@ -71,7 +71,7 @@
 
     <!-- botoes salvar/sair -->
     <div class="flex flex-row w-full justify-between px-6 border-t-[1px] border-t-gray-300 py-2">
-      <button  id="btnCLOSE" class="btnCANCELAR" @click="emit('closeExpressionForm')" >Esc= cancelar</button>
+      <button  id="btnCLOSE" class="btnCANCELAR" @click="emit('closeForm')" >Esc= cancelar</button>
 
       <button  id="btnSALVAR" class="btnSALVAR" @click="saveFornecedor()" aria-hidden="true">F2= salvar</button>
     </div>
@@ -89,6 +89,9 @@ import { makeWindowDraggable, slidingMessage   } from '../assets/js/utils.js'
 const emit = defineEmits( ['showLoading', 'hideLoading', 'closeForm','refreshDatatable'] );
 
 const props = defineProps( ['backendUrl', 'formHttpMethodApply', 'currentId'] )
+
+//************************************************************************************************************************************************************
+//************************************************************************************************************************************************************
 
 onMounted( () => {
   getFornecedorFormPopulatedAndReady()
@@ -161,7 +164,7 @@ const preparaFormFornecedor = () => {
   }, 500);
 
   // faz o form ser arrastavel
-  makeWindowDraggable('divWINDOW_TOP', 'expressionForm')
+  makeWindowDraggable('divWINDOW_TOP', 'fornecedorForm')
 }
 
 
@@ -174,25 +177,31 @@ const preparaFormFornecedor = () => {
 async function saveFornecedor()  {
 
   let error = ''
+  let toFocus = ''
 
-  if ( $('#txtRazao').val().trim().length < parseInt($('#txtRazao').attr('minlength'), 10)  )  
+  if ( $('#txtRazao').val().trim().length < parseInt($('#txtRazao').attr('minlength'), 10)  )  {
       error = 'Preencha a razão social do fornecedor - Min '+$('#txtRazao').attr('minlength')
+      toFocus = 'txtRazao'
+  }
 //  if ( $('#txtCNPJ').val().trim().length < parseInt($('#txtCNPJ').attr('minlength'), 10) )  
 //      error = 'CNPJ inválido'
-  if ( $('#txtFantasia').val().trim().length < parseInt($('#txtFantasia').attr('minlength'), 10) )  
+  if ( $('#txtFantasia').val().trim().length < parseInt($('#txtFantasia').attr('minlength'), 10) )   {
       error = 'Preencha o nome fantasia - Min '+$('#txtFantasia').attr('minlength')
+      toFocus = 'txtFantasia'
+  }
 
 
   // show any error detected
   if (error!='') {
     slidingMessage(error, 3000)
+    $(`#${toFocus}`).focus()    
     return;
   }
 
   var formData = new FormData(); 
-  formData.append('nome', $('#txtNome').val())
+  formData.append('razao_social', $('#txtRazao').val())
   formData.append('cnpj', $('#txtCNPJ').val())
-  formData.append('fantasia', $('#txtFantasia').val())
+  formData.append('nome_fantasia', $('#txtFantasia').val())
 
   let route = '', acao = ''
   if (props.formHttpMethodApply=='POST')  {
@@ -230,7 +239,7 @@ async function saveFornecedor()  {
   })
   .catch((error) => {
     emit('hideLoading')
-    slidingMessage('Error= '+error, 3000)        
+    slidingMessage(error, 3000)        
   })  
 
 }

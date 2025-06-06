@@ -115,7 +115,14 @@ const makeWindowDraggable = (title_id, window_id) => {
 a tooltip jquery nao some quando clica se sobre o elemento, necessario fazer a tooltip sumir via codigo
 ***********************************************************************************************************************/
 const forceHideToolTip = () => {
-  $('div[class^="ui-tooltip"]').remove();
+  $('[role="tooltip"]').remove();
+
+  // confirma que as tooltips estao ok
+  setTimeout(() => {
+    improveTooltipLook()  
+  }, 100);
+
+
 }
 
 /*******************************************************************************/
