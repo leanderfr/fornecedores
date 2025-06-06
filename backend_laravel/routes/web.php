@@ -23,6 +23,7 @@ Route::get('fornecedores', 'App\Http\Controllers\FornecedorController@index');
 Route::get('fornecedores/{status}/{searchbox}', 'App\Http\Controllers\FornecedorController@index');
 Route::get('fornecedores/{status}', 'App\Http\Controllers\FornecedorController@index');
 Route::get('fornecedor/{id}', 'App\Http\Controllers\FornecedorController@getById');
+Route::patch('fornecedor/{id}', 'App\Http\Controllers\FornecedorController@update');
 
 Route::get('usuarios', 'App\Http\Controllers\UsuarioController@index');
 Route::get('usuarios/{status}/{searchbox}', 'App\Http\Controllers\UsuarioController@index');

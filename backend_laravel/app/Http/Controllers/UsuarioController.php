@@ -38,7 +38,7 @@ class UsuarioController extends Controller
 
         }
 
-        return response()->json(new UsuarioResource($usuarios));
+        return response()->json(UsuarioResource::collection($usuarios));
         //return UsuarioResource::collection($usuarios);
     }
 
