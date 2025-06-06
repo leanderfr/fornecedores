@@ -79,7 +79,7 @@ function executeFetchQueryAndReturnJsonResult($sql, $simplifyJSON=false, $toRetu
     internalError( mysqli_error($dbConnection) );
   }
 
-  $anyData = mysqli_num_rows($result) > 0;
+  $temInfo = mysqli_num_rows($result) > 0;
 
   // different treatment when returning expressions portuguese/english
   if ($toReturnExpressions)  {
@@ -113,7 +113,7 @@ function executeFetchQueryAndReturnJsonResult($sql, $simplifyJSON=false, $toRetu
   //********************************************************************************************
   http_response_code(200);   // 200= everything's ok
 
-  if ($anyData)     {
+  if ($temInfo)     {
       die( json_encode($json) );     
   }
   else   
@@ -144,48 +144,5 @@ function executeCrudQueryAndReturnResult($sql, $needToReturnId = false  ) {
 }
 
 
-//***********************************************************************
-// write car image file in the AWS S3 repository
-//***********************************************************************
-function uploadImageToAWS_S3($fileName, $prefixFileName)  {
-
-  global $AWS_S3_APIKEY, $AWS_S3_SECRETKEY, $AWS_S3_BUCKET, $AWS_S3_IMAGES_FOLDER;
-
-  // file name locally written 
-  $localFile = "$prefixFileName.png";
-
-  if (! move_uploaded_file( $_FILES[$fileName]['tmp_name'], "tmp/$localFile"))  
-    internalError( "Image upload failed => tmp/$localFile");
-  
-  try {
-    $s3Client = new S3Client([
-        'region' => 'sa-east-1',
-        'version' => 'latest',
-        'suppress_php_deprecation_warning' => true,
-        'credentials' => [
-            'key' => $AWS_S3_APIKEY,
-            'secret' => $AWS_S3_SECRETKEY
-        ]
-    ]);
- 
-} catch(S3 $e) {
-    die('err='. $e->getMessage());
- }
-
-  try {
-      $result = $s3Client->putObject([
-        'Bucket' => $AWS_S3_BUCKET,
-        'Key'    => "$AWS_S3_IMAGES_FOLDER/$localFile",
-        'Body'   => fopen("tmp/$localFile", 'r'),
-
-      ]);
-  }
-  catch (S3 $e) {
-      internalError( $e->getMessage() );
-  }
-
-}
-
-
-
+//******************************
 ?>

@@ -32,12 +32,9 @@ const emit = defineEmits(['setMenuItem', 'hideLoading']);
 //*****************************************************************************
 //*****************************************************************************
 onMounted( () => {
-console.log('cheou')
-setTimeout(() => {
-emit('hideLoading')  
-}, 1000);
-
-console.log('cheou222')
+  setTimeout(() => {
+  emit('hideLoading')  
+  }, 1000);
 
 })
     

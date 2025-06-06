@@ -90,6 +90,17 @@ if ($postRequest)  {
 
 }
 
+//*********************************************************************************************************************************************************
+// excluir registro (DELETE)
+if ($deleteRequest) {
+
+    $router->Delete("/fornecedor/{id}", function($id) use($handlerFornecedores)  {  
+      $handlerFornecedores->deleteFornecedor($id);
+    }); 
+
+}
+
+
 
 $router->dispatch($path);
 

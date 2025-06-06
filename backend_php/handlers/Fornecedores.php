@@ -14,7 +14,7 @@ class Fornecedores
 
     // prioridade é filtrar baseado na searchbox enviada
     if ($searchbox!='')  {
-      $sql .= "and trim(razao_social) like('%$searchbox%') or trim(razao_social) like('%$searchbox%') ";
+      $sql .= "and (trim(razao_social) like('%$searchbox%') or trim(razao_social) like('%$searchbox%')) ";
     } 
 
     // searchbox vazia, filtra pelo status 
@@ -23,7 +23,7 @@ class Fornecedores
         else if ($status=='inactive') $sql .= 'and ifnull(active, false)=false';
     }
 
-    //$sql .= ' order by razao_social';
+    $sql .= ' order by razao_social';
 
     executeFetchQueryAndReturnJsonResult( $sql, false, false );
   }
@@ -96,6 +96,23 @@ class Fornecedores
       [$_FIELDS] = request_parse_body();   // desmenbra FIELDS
     }
 
+    // verifica se ha fornecedor cadastrado com CNPJ enviado
+    $cnpjTeste = $_FIELDS['cnpj'];
+    $sql =  "select razao_social  ".
+            "from fornecedores  ".
+            "where trim(cnpj) = trim('$cnpjTeste') and deleted_at is null ";
+
+    if ($fornecedor_id!='')    {    
+      $sql .= " and id <> $fornecedor_id";
+    }
+
+    $result = mysqli_query($dbConnection, $sql) or internalError('[1] Database error / Erro na base de dados');    
+    if ( mysqli_num_rows($result) > 0 ) {
+      http_response_code(500);   
+      die('Fornecedor já cadastrado');
+    }
+
+
     // faz analise abaixo caso alguem esteja usando POSTMAN ou INSONMIA ou ouutro soft para inserir dados de forma 'clandestina'
     // o frontend ja fez a verificacao previa, mas eu sempre implanto verificacao em ambos os lados
     $dataError = '';
@@ -166,8 +183,28 @@ class Fornecedores
     http_response_code(200);   // 200= tudo ok
     if ($dbOperation == 'update')   die( '__successo__' );
     else die( $result );    // __successo__|id registro
+  }
 
+
+
+  //***************************************************************************************************************************************
+  //***************************************************************************************************************************************
+  public function deleteFornecedor($id=''): void   {
+    global $dbConnection;
+
+    if (! is_numeric($id))   routeError();
+
+    $crudSql = "update fornecedores set deleted_at=now() where id = $id ";
+    $dbConnection -> autocommit(true);    
+
+    $result = executeCrudQueryAndReturnResult($crudSql);    
+
+    http_response_code(200);   // 200= it was ok
+    die( '__successo__' );
   }
 
 
 }
+
+
+?>

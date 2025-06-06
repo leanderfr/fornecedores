@@ -67,7 +67,7 @@
             </div>
             <div class='h-[45px]'>
               <input type="text" autocomplete="off" sequence="2"   id="txtRazao_social" maxlength='150' minlength='5' class='text_formFieldValue' 
-                msgErro='Preencha a razão social' >  
+                msgErro='Preencha a razão social' >
             </div>
             <div class='h-[45px]'>
               <input type="text" autocomplete="off" sequence="3"   id="txtLogradouro" maxlength='150' minlength='5' class='text_formFieldValue' 
@@ -113,7 +113,8 @@
     <div class="flex flex-row w-full justify-between px-6 border-t-[1px] border-t-gray-300 py-2">
       <button  id="btnCLOSE" class="btnCANCELAR" @click="emit('closeForm')" >Esc= cancelar</button>
 
-      <button  id="btnSALVAR" class="btnSALVAR" @click="saveFornecedor()" aria-hidden="true">F2= salvar</button>
+      <button v-if='! exibirBtnExcluir' id="btnSALVAR" class="btnSALVAR" @click="salvarFornecedor()" aria-hidden="true">F2= salvar</button>
+      <button v-if='exibirBtnExcluir==true' id="btnDELETE" class="btnDELETE" @click="excluirFornecedor()" aria-hidden="true">Excluir</button>
     </div>
 
   </div> 
@@ -128,7 +129,7 @@ import { onMounted, ref  } from 'vue';
 import { makeWindowDraggable, slidingMessage, cnpjOK, getNumbersFromString  } from '../assets/js/utils.js'
 const emit = defineEmits( ['showLoading', 'hideLoading', 'closeForm','refreshDatatable', 'setCurrentId'] );
 
-const props = defineProps( ['backendUrl', 'formHttpMethodApply', 'currentId'] )
+const props = defineProps( ['backendUrl', 'formHttpMethodApply', 'currentId', 'exibirBtnExcluir'] )
 
 //************************************************************************************************************************************************************
 //************************************************************************************************************************************************************
@@ -231,14 +232,14 @@ const preparaFormFornecedor = () => {
 /********************************************************************************************************************************************************
  valida dados no front end primeiramente
 ********************************************************************************************************************************************************/
-async function saveFornecedor()  {
+async function salvarFornecedor()  {
 
   let cmpFocar = ''
   let erroExibir = ''
 
   var formData = new FormData();  // body do request
 
-  // percorre campos para critica dos dados digitados
+  // percorre campos para crítica dos dados digitados
   $("input[type='text']").each(function() {
     
     let vlr = $.trim( $(this).val() );
@@ -286,7 +287,7 @@ async function saveFornecedor()  {
 
   .then(response => {
     if (!response.ok) {
-      return response.text().then(text => {throw new Error(`HTTP error! ${response.status}` + text)})
+      return response.text().then(text => {throw new Error(`HTTP error! <strong>${response.status}` + text + '</strong>')})
     }
     return response.text()
   })
@@ -301,8 +302,42 @@ async function saveFornecedor()  {
         emit('setCurrentId', currentId)    // devolve para Datatable o ID do reg recem criado
       }
 
+      emit('closeForm')  
+      emit('refreshDatatable')  
+
+    }, 1700);
+    
+  })
+  .catch((error) => {
+    emit('hideLoading')
+    slidingMessage(error, 3000)        
+  })  
+}
 
 
+/********************************************************************************************************************************************************
+exclui registro
+********************************************************************************************************************************************************/
+async function excluirFornecedor()  {
+
+  setTimeout(() => {
+    emit('showLoading')    
+  }, 10);
+  
+  // insere ou edita reg
+  await fetch(`${props.backendUrl}/fornecedor/${props.currentId}`, {method: 'DELETE'})
+
+  .then(response => {
+    if (!response.ok) {
+      return response.text().then(text => {throw new Error(`HTTP error! <strong>${response.status}` + text + '</strong>')})
+    }
+    return response.text()
+  })
+  .then((msg) => {
+    slidingMessage('Registro excluído', 1500)        
+    emit('hideLoading')
+
+    setTimeout(() => {
       emit('closeForm')  
       emit('refreshDatatable')  
 

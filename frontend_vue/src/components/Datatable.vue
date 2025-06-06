@@ -65,7 +65,7 @@
               <!-- exibe/esconde registros inativos -->
               <div v-if="currentStatus=='inactive'" class='btnTABLE_ONLY_INACTIVE_RECORDS_ON putPrettierTooltip' 
                     title='Somente inativos'
-                    @click="forceHideToolTip();currentStatus=''" 
+                    @click="forceHideToolTip();currentStatus='all'" 
                     aria-hidden="true"></div>   
 
               <div v-else class='btnTABLE_ONLY_INACTIVE_RECORDS_OFF putPrettierTooltip' 
@@ -113,7 +113,7 @@
                   <!-- se a ultima coluna foi impressa e reg ativo, adiciona 3 icones de acao (editar, excluir, desativar ) -->
                   <div v-if='index === columns.length-1 && record.active==1' class='actionColumn' :style="{width: column.width}" :key="'tr-'+index" >
                       <div class='actionIcon' @click='editForm(record.id)' ><img alt=''  src='../assets/images/edit.svg' /></div>
-                      <div class='actionIcon'  @click='deleteRecord'><img alt=''   src='../assets/images/delete.svg' /></div>
+                      <div class='actionIcon'  @click='editForm(record.id, true)'><img alt=''   src='../assets/images/delete.svg' /></div>
                       <div class='actionIcon' @click='changeStatus(record.id)'><img alt=''  src='../assets/images/active.svg' /></div>
                   </div>   
 
@@ -143,6 +143,7 @@
         @showLoading="emit('showLoading')" 
         @hideLoading="emit('hideLoading')"  
         @setCurrentId='setCurrentId'
+        :exibirBtnExcluir='exibirBtnExcluir'
         @refreshDatatable = "fetchData();"   />
   </div>
 
@@ -206,6 +207,10 @@ const showTipSearchbox = ref(false)
 
 // tem filtro aplicado no exato momento?
 const filterApplied = ref(false)  
+
+// controla se deve oferecer o botao 'excluir' no form de edicao
+const exibirBtnExcluir = ref(null)
+
 
 
 
@@ -322,11 +327,14 @@ async function fetchData() {
 //***************************************************************************
 // usuario clicou em determinado registro para editar ou pediu para add um reg
 //*************************************************************************** 
-const editForm = (id='') => {
+const editForm = (id='', excluir=false) => {
   currentId.value = id;
 
   if (id=='') formHttpMethodApply.value = 'POST'  // add record
   else formHttpMethodApply.value = 'PATCH'  // update record
+
+  if (excluir) exibirBtnExcluir.value=true
+  else exibirBtnExcluir.value=false
 
   if (props.currentViewedDatatable === 'fornecedores')   {  
     exibirFormFornecedor.value = true
@@ -339,7 +347,13 @@ const editForm = (id='') => {
 //*************************************************************************** 
 async function changeStatus (id) {
 
-  let route = `${props.backendUrl}/${props.currentViewedDatatable}/status/${id}`
+  // converte nome tabela no plurarl para singular, pois backend aguarda no singular, pois é 1 registro sendo alterado  
+  // melhor assim para organizar as rotas
+  let tipoReg=''
+  if (props.currentViewedDatatable=='fornecedores') tipoReg='fornecedor'
+  if (props.currentViewedDatatable=='usuarios') tipoReg='usuarios'
+
+  let route = `${props.backendUrl}/${tipoReg}/status/${id}`
 
   emit('showLoading')
 

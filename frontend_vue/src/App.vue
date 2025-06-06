@@ -123,7 +123,7 @@
 
   const toRefreshDatatable = ref(0)  
 
-  const isLaravelSelected = ref(true)
+  const isLaravelSelected = ref(false)
   const isLoading = ref(true)
   const error = ref(null)
 
@@ -264,8 +264,9 @@ const onKeyDown = (e) =>  {
         if (editionForm)  {
           if (e.which == 27)   $('#btnCLOSE').trigger('click')
 
-          // 'F2= salvar'
-          if (e.which == 113)   $('#btnSALVAR').trigger('click')   // f2 was pressed
+          // 'F2= salvar' pressionado qdo existe botao para salvar
+          if (e.which == 113 && typeof $('#btnSALVAR').attr('id')!='undefined')   
+              $('#btnSALVAR').trigger('click')   // f2 was pressed
         }
   }
 }
