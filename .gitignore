@@ -22,3 +22,6 @@ frontend_vue/*.sln
 frontend_vue/*.sw?
 
 backend_php/setup.php
+
+backend_laravel/.env
+backend_laravel/.env.example
