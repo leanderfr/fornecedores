@@ -8,7 +8,7 @@ class Fornecedores
 
   public function getFornecedores(string $status, string $searchbox): void   {
 
-    $sql =  "select id, english, portuguese, item, ifnull(active, false) as active ".
+    $sql =  "select id, razao_social, nome_fantasia, cnpj, ifnull(active, false) as active ".
             "from fornecedores  ".
             "where deleted_at is null ";
 
@@ -23,7 +23,7 @@ class Fornecedores
         else if ($status=='inactive') $sql .= 'and ifnull(active, false)=false';
     }
 
-    $sql .= ' order by item';
+    //$sql .= ' order by razao_social';
 
     executeFetchQueryAndReturnJsonResult( $sql, false, false );
   }
