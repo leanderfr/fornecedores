@@ -25,8 +25,8 @@ EXPOSE 8080
 CMD [ "http-server", "dist" ]
 
 
-# docker build -t hm_vue_php_frontend .
+# docker build -t revendamais_frontend_vue .
 
-# docker run -it -d -p 8080:8080 --rm --name hm_vue_php_frontend hm_vue_php_frontend
+# docker run -it -d -p 8075:8080 --rm --name revendamais_frontend_vue revendamais_frontend_vue
 
 
