@@ -38,8 +38,20 @@ class UsuarioController extends Controller
 
         }
 
-        return UsuarioResource::collection($usuarios);
+        return response()->json(new UsuarioResource($usuarios));
+        //return UsuarioResource::collection($usuarios);
     }
+
+    //*********************************************************************************
+    //*********************************************************************************
+    public function getById()
+    {
+        $usuario_id = request()->route('id');
+        $usuario = Usuario::find($usuario_id);
+        //return new UsuarioResource($fornecedor);
+        return response()->json(new UsuarioResource($usuario));
+    }
+
 
     //*********************************************************************************
     //*********************************************************************************

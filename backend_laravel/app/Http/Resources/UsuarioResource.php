@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UsuarioResource extends JsonResource
 {
+    public static $wrap = null;  // exclui a necessidade de agrupar com a chave 'data'
+
     public function toArray(Request $request): array
     {
         return [

@@ -7,11 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class FornecedorResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
+    //public static $wrap = null;  // exclui a necessidade de agrupar com a chave
+
     public function toArray(Request $request): array
     {
         //return parent::toArray($request);

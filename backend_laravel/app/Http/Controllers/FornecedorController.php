@@ -38,8 +38,21 @@ class FornecedorController extends Controller
 
         }
 
-        return FornecedorResource::collection($fornecedores);
+        return response()->json(FornecedorResource::collection($fornecedores));
+        //return new FornecedorResource($fornecedores);
+        //return response()->json(new FornecedorResource($fornecedores));
     }
+
+    //*********************************************************************************
+    //*********************************************************************************
+    public function getById()
+    {
+        $fornecedor_id = request()->route('id');
+        $fornecedor = Fornecedor::find($fornecedor_id);
+        //return new FornecedorResource($fornecedor);
+        return response()->json(new FornecedorResource($fornecedor));
+    }
+
 
     //*********************************************************************************
     //*********************************************************************************

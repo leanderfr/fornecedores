@@ -97,7 +97,7 @@
           <div  class="DatatableRows" v-for='record in records' :key="record"  @click="rowClicked('tr_'+record.id)" :id="'tr_'+record.id"> 
 
               <!-- se o status= ativo, imprime em preto, se nao, vermelho -->
-              <div :class="record.active ? 'DatatableRow' : 'DatatableRowInactiveRecord'"   >         
+              <div class='DatatableRow'  >         
 
                 <!-- imprime cada coluna -->
                 <template v-for='(column, index) in columns'   >         
@@ -327,9 +327,7 @@ async function fetchData() {
         setTimeout(() => {
           scrollUntilElementVisible(lastRowUpdated)
           $(`#${lastRowUpdated}`).addClass('DatatableRow_selected')  
-        }, 100);
-        
-
+        }, 100);        
     }, 300);
 
 
