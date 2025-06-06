@@ -25,6 +25,7 @@ require 'setup.php';
 require 'functions.php';
 require "Router.php";
 require "handlers/Fornecedores.php";  
+require "handlers/Usuarios.php";  
 
 
 //********************************************************************
@@ -34,6 +35,7 @@ $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
 // prepara handlers (controllers)
 $handlerFornecedores = new Fornecedores;
+$handlerUsuarios = new Usuarios;
 
 $router = new Router;
 
@@ -60,6 +62,19 @@ if ($getRequest) {
   });
 
 
+  $router->Get("/usuarios/{status}/{searchbox}", function($status, $searchbox) use($handlerUsuarios) {  
+    $handlerUsuarios->getUsuarios($status, $searchbox);
+  });
+
+  // nenhum  searchbox recebido
+  $router->Get("/usuarios/{status}", function($status) use($handlerUsuarios) {  
+    $handlerUsuarios->getUsuarios($status, '');
+  });
+
+  $router->Get("/usuario/{id}", function($id) use($handlerUsuarios)  {  
+    $handlerUsuarios->getUsuarioById($id);
+  });
+
 
  
 
@@ -76,7 +91,17 @@ if ($patchRequest) {
       $handlerFornecedores->ChangeStatus($id);
     });
 
- 
+    $router->Patch("/usuario/{id}", function($id) use($handlerUsuarios)  {  
+      $handlerUsuarios->postOuPatchUsuario($id);
+    });
+
+    $router->Patch("/usuario/status/{id}", function($id) use($handlerUsuarios)  {  
+      $handlerUsuarios->ChangeStatus($id);
+    });
+
+
+
+
 }
 
 
@@ -88,6 +113,11 @@ if ($postRequest)  {
       $handlerFornecedores->postOuPatchFornecedor();
     });
 
+    $router->Post("/usuario", function() use($handlerUsuarios)  {  
+      $handlerUsuarios->postOuPatchUsuario();
+    });
+
+
 }
 
 //*********************************************************************************************************************************************************
@@ -96,6 +126,10 @@ if ($deleteRequest) {
 
     $router->Delete("/fornecedor/{id}", function($id) use($handlerFornecedores)  {  
       $handlerFornecedores->deleteFornecedor($id);
+    }); 
+
+    $router->Delete("/usuario/{id}", function($id) use($handlerUsuarios)  {  
+      $handlerUsuarios->deleteUsuario($id);
     }); 
 
 }

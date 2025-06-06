@@ -147,6 +147,20 @@
         @refreshDatatable = "fetchData();"   />
   </div>
 
+  <!-- usuario pediu para editar/inserir usuario -->  
+  <div v-if="exibirFormUsuario" id='backDrop' class='w-full h-full  absolute flex items-center justify-center left-0 top-0 z-10 bg-[rgba(0,0,0,0.5)]' @click.self='exibirFormUsuario=false' aria-hidden="true"  >  
+    <usuarioForm  
+        :backendUrl='props.backendUrl' 
+        :currentId='currentId'
+        :formHttpMethodApply = 'formHttpMethodApply'  
+        @closeForm="exibirFormUsuario=false"  
+        @showLoading="emit('showLoading')" 
+        @hideLoading="emit('hideLoading')"  
+        @setCurrentId='setCurrentId'
+        :exibirBtnExcluir='exibirBtnExcluir'
+        @refreshDatatable = "fetchData();"   />
+  </div>
+
 
 </div>
 
@@ -157,6 +171,7 @@
 import { slidingMessage, forceHideToolTip , divStillVisible, scrollUntilElementVisible, improveTooltipLook } from '../assets/js/utils.js'
 import { onMounted, ref, watch  } from 'vue';
 import FornecedorForm from './FornecedorForm.vue';
+import UsuarioForm from './UsuarioForm.vue';
 
 const emit = defineEmits( ['showLoading', 'hideLoading' ] );
 const props = defineProps( ['currentViewedDatatable', 'backendUrl' ] )
@@ -166,6 +181,9 @@ const records = ref(null)
 
 // formulario de fornecedor deve ser mostrado?
 const exibirFormFornecedor = ref(false)
+
+// formulario de usuario deve ser mostrado?
+const exibirFormUsuario = ref(false)
 
 // colunas que serao exibidias dependendo da tabela sendo vista 
 let columns = []
@@ -183,8 +201,7 @@ if (props.currentViewedDatatable === 'fornecedores')   {
 // usuario pediu ver tabela fornecedores
 if (props.currentViewedDatatable === 'usuarios')   {
   columns.push({ fieldname: "id", width: "5%", title: 'Id', id: 'col1', boolean: false },
-              { fieldname: "nome", width: "calc(25% - 150px)", title: 'Nome', id: 'col2', boolean: false},
-              { fieldname: "is_admin", width: "35%", title: 'Administrador', id: 'col3', boolean: true} )
+              { fieldname: "nome", width: "calc(95% - 150px)", title: 'Nome', id: 'col2', boolean: false} )
   title = 'Usuários'
 }
 
@@ -339,6 +356,10 @@ const editForm = (id='', excluir=false) => {
   if (props.currentViewedDatatable === 'fornecedores')   {  
     exibirFormFornecedor.value = true
   }
+  if (props.currentViewedDatatable === 'usuarios')   {  
+    exibirFormUsuario.value = true 
+  }
+
 
 }
 
@@ -351,7 +372,7 @@ async function changeStatus (id) {
   // melhor assim para organizar as rotas
   let tipoReg=''
   if (props.currentViewedDatatable=='fornecedores') tipoReg='fornecedor'
-  if (props.currentViewedDatatable=='usuarios') tipoReg='usuarios'
+  if (props.currentViewedDatatable=='usuarios') tipoReg='usuario'
 
   let route = `${props.backendUrl}/${tipoReg}/status/${id}`
 

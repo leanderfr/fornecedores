@@ -1,20 +1,20 @@
 <?php
 
-class Fornecedores
+class Usuarios
 {
 
   //***************************************************************************************************************************************
   //***************************************************************************************************************************************
 
-  public function getFornecedores(string $status, string $searchbox): void   {
+  public function getUsuarios(string $status, string $searchbox): void   {
 
-    $sql =  "select id, razao_social, cnpj, logradouro, numero, bairro, cep, cidade, uf, pais, ifnull(active, false) as active ".
-            "from fornecedores  ".
+    $sql =  "select id, nome, ifnull(active, false) as active ".
+            "from usuarios  ".
             "where deleted_at is null ";
 
     // prioridade é filtrar baseado na searchbox enviada
     if ($searchbox!='')  {
-      $sql .= "and trim(razao_social) like('%$searchbox%')  ";
+      $sql .= "and trim(nome) like('%$searchbox%') ";
     } 
 
     // searchbox vazia, filtra pelo status 
@@ -23,7 +23,7 @@ class Fornecedores
         else if ($status=='inactive') $sql .= 'and ifnull(active, false)=false';
     }
 
-    $sql .= ' order by razao_social';
+    $sql .= ' order by nome';
 
     executeFetchQueryAndReturnJsonResult( $sql, false, false );
   }
@@ -31,9 +31,9 @@ class Fornecedores
   //***************************************************************************************************************************************
   //***************************************************************************************************************************************
 
-  public function getFornecedorById($id): void   {
-    $sql =  "select razao_social, cnpj, logradouro, numero, bairro, cep, cidade, uf, pais, ifnull(active, false) as active ".
-            "from fornecedores  ".
+  public function getUsuarioById($id): void   {
+    $sql =  "select nome, ifnull(active, false) as active ".
+            "from usuarios  ".
             "where id=$id ";
 
     executeFetchQueryAndReturnJsonResult( $sql, true);
@@ -52,7 +52,7 @@ class Fornecedores
       internalError( 'Not numeric' );
     }
 
-    $crudSql = "update fornecedores set active = if(active, false, true) where id = $id ";
+    $crudSql = "update usuarios set active = if(active, false, true) where id = $id ";
     $dbConnection -> autocommit(true);    // grava sem necessidade de commit manual
 
     $result = executeCrudQueryAndReturnResult($crudSql, true);    
@@ -65,27 +65,19 @@ class Fornecedores
 
   //***************************************************************************************************************************************
   //***************************************************************************************************************************************
-  public function postOuPatchFornecedor($fornecedor_id=''): void   {
+  public function postOuPatchUsuario($usuario_id=''): void   {
     global $dbConnection;
 
-    // se ID veio na rota (fornecedor_id) é PATCH
+    // se ID veio na rota (usuario_id) é PATCH
     // se nao veio é POST
-  	if ($fornecedor_id!='' && ! is_numeric($fornecedor_id))   routeError();
+  	if ($usuario_id!='' && ! is_numeric($usuario_id))   routeError();
 
     // verify request
-    $fields = [ ['string', 'razao_social', 5, 150]  ,
-                ['string', 'cnpj', 18, 18],
-                ['string', 'logradouro', 5, 150],
-                ['string', 'numero', 2, 20],
-                ['string', 'bairro', 5, 150],
-                ['string', 'cep', 9, 9],
-                ['string', 'cidade', 5, 150],
-                ['string', 'uf', 2, 2],
-                ['string', 'cep', 5, 150],
+    $fields = [ ['string', 'nome', 5, 150] 
               ];
 
     // se é POST, obtem dados usando o conhecido $_POST 
-    if ($fornecedor_id=='')    {
+    if ($usuario_id=='')    {
       $_FIELDS = $_POST;
     }
 
@@ -94,22 +86,6 @@ class Fornecedores
     // versoes anteriores nao leem!   ja perdi muito tempo no passado tentando fazer ler com PHP < 8.4
     else {
       [$_FIELDS] = request_parse_body();   // desmenbra FIELDS
-    }
-
-    // verifica se ha fornecedor cadastrado com CNPJ enviado
-    $cnpjTeste = $_FIELDS['cnpj'];
-    $sql =  "select razao_social  ".
-            "from fornecedores  ".
-            "where trim(cnpj) = trim('$cnpjTeste') and deleted_at is null ";
-
-    if ($fornecedor_id!='')    {    
-      $sql .= " and id <> $fornecedor_id";
-    }
-
-    $result = mysqli_query($dbConnection, $sql) or internalError('[1] Database error / Erro na base de dados');    
-    if ( mysqli_num_rows($result) > 0 ) {
-      http_response_code(500);   
-      die('Fornecedor já cadastrado');
     }
 
 
@@ -144,30 +120,20 @@ class Fornecedores
 
     if ($dataError!='') internalError( $dataError );
 
-    $razao_social =   addslashes($_FIELDS['razao_social']);
-    $cnpj =   addslashes($_FIELDS['cnpj']);
-    $logradouro =   addslashes($_FIELDS['logradouro']);
-    $numero =   addslashes($_FIELDS['numero']);
-    $cep =   addslashes($_FIELDS['cep']);
-    $bairro =   addslashes($_FIELDS['bairro']);
-    $cidade =   addslashes($_FIELDS['cidade']);
-    $uf =   addslashes($_FIELDS['uf']);
-    $pais =   addslashes($_FIELDS['pais']);
-
+    $nome =   addslashes($_FIELDS['nome']);
 
     // se ID nao informado , é POST
-    if ($fornecedor_id=='')    {
-      $crudSql = "insert into fornecedores(razao_social, cnpj, logradouro, numero, bairro, cep, cidade, uf, pais, created_at, updated_at, active) ". 
-                "select '$razao_social', '$cnpj', '$logradouro', '$numero', '$bairro', '$cep', '$cidade', '$uf', '$pais', now(), now(), true "; 
+    if ($usuario_id=='')    {
+      $crudSql = "insert into usuarios(nome, created_at, updated_at, active) ". 
+                "select '$nome', now(), now(), true "; 
       $dbOperation = 'insert';
     }
 
     // se ID informado, é PATCH
     else { 
-      $crudSql = "update fornecedores set razao_social='$razao_social', cnpj='$cnpj', logradouro='$logradouro', ".
-                 "       numero='$numero', cep='$cep', bairro='$bairro', cidade='$cidade', uf='$uf', pais='$pais', ".
+      $crudSql = "update usuarios set nome='$nome', ".
                  " updated_at=now() ". 
-                "where id = $fornecedor_id ";
+                "where id = $usuario_id ";
       $dbOperation = 'update';
     } 
     $dbConnection -> autocommit(true);    // registra sem precisar commit manual
@@ -176,8 +142,8 @@ class Fornecedores
     $result = executeCrudQueryAndReturnResult($crudSql, true);    
 
     // se foi um POST, obtem o ID recem criado (__successo__|record id)
-    if ($fornecedor_id=='') {
-      $fornecedor_id = explode("|", $result)[1];
+    if ($usuario_id=='') {
+      $usuario_id = explode("|", $result)[1];
     }
 
     http_response_code(200);   // 200= tudo ok
@@ -189,13 +155,14 @@ class Fornecedores
 
   //***************************************************************************************************************************************
   //***************************************************************************************************************************************
-  public function deleteFornecedor($id=''): void   {
+  public function deleteUsuario($id=''): void   {
     global $dbConnection;
 
     if (! is_numeric($id))   routeError();
 
-    $crudSql = "update fornecedores set deleted_at=now() where id = $id ";
+    $crudSql = "update usuarios set deleted_at=now() where id = $id ";
     $dbConnection -> autocommit(true);    
+
 
     $result = executeCrudQueryAndReturnResult($crudSql);    
 
