@@ -67,10 +67,9 @@ class FornecedorController extends Controller
     //*********************************************************************************
     //*********************************************************************************
 
+    // nao consigo fazer update funcionar, desespero, maldito csrf
     public function update(StoreFornecedorRequest $request, Fornecedor $fornecedor)
     {
-
-die('lçjkdslçjkdslçk');
 
       $fornecedor->update($request->validate());
       return new FornecedorResource($fornecedor);
