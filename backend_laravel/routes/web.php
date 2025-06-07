@@ -22,7 +22,7 @@ Route::get('/fornecedor/{id}', [FornecedorController::class, 'getById']);
 Route::patch('/fornecedor/{id}', [FornecedorController::class, 'update']);
 Route::patch('/fornecedor/status/{id}', [FornecedorController::class, 'status']);
 
-Route::post('/fornecedor/{id}', [FornecedorController::class, 'post']);
+Route::post('/fornecedor', [FornecedorController::class, 'post']);
 
 Route::delete('/fornecedor/{id}', [FornecedorController::class, 'delete']);
 
@@ -31,14 +31,14 @@ Route::delete('/fornecedor/{id}', [FornecedorController::class, 'delete']);
 Route::get('/usuarios/{status}/{searchbox}', [UsuarioController::class, 'lista']);
 Route::get('/usuarios/{status}', [UsuarioController::class, 'lista']);
 
-Route::get('/usuarios/{id}', [UsuarioController::class, 'getById']);
+Route::get('/usuario/{id}', [UsuarioController::class, 'getById']);
 
-Route::patch('/usuarios/{id}', [UsuarioController::class, 'update']);
-Route::patch('/usuarios/status/{id}', [UsuarioController::class, 'status']);
+Route::patch('/usuario/{id}', [UsuarioController::class, 'update']);
+Route::patch('/usuario/status/{id}', [UsuarioController::class, 'status']);
 
-Route::post('/usuarios/{id}', [UsuarioController::class, 'post']);
+Route::post('/usuario', [UsuarioController::class, 'post']);
 
-Route::delete('/usuarios/{id}', [UsuarioController::class, 'delete']);
+Route::delete('/usuario/{id}', [UsuarioController::class, 'delete']);
 
 
 

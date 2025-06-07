@@ -218,15 +218,14 @@
       //isLoading.value = true;
 
       // backend PHP na AWS
-      if ( ! isLaravelSelected.value )
+      if ( ! isLaravelSelected.value ) {
           backendUrl.value = 'http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8073'
+      }
 
       // backend Laravel na AWS
       if ( isLaravelSelected.value ) {
-          //backendUrl.value = 'http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8080'
-          backendUrl.value = 'http://127.0.0.1:8082'
-console.log(backendUrl.value)
-alert(2)
+          backendUrl.value = 'http://ec2-54-233-183-5.sa-east-1.compute.amazonaws.com:8080'
+          //backendUrl.value = 'http://127.0.0.1:8082'
       }
 
 

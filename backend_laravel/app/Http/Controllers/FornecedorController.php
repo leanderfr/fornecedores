@@ -77,31 +77,43 @@ class FornecedorController extends Controller
   }
 
 
-
   // *************************************************************************************************************
   // *************************************************************************************************************
 
   public function post(Request $request) {
-
       $validado = $request->validate($this->camposGravar, $this->erros);
-      $rornecedor = Fornecedor::create($validado);
+
+      try {
+        Fornecedor::create($validado);
+      } catch (\Illuminate\Database\QueryException $exception) {
+        $errorInfo = $exception->errorInfo;
+
+        die('aa'.$errorInfo);
+      }
+  }
+
+  //*********************************************************************************
+  //*********************************************************************************
+  public function update(Request $request)
+  {
+    $validado = $request->validate($this->camposGravar, $this->erros);
+
+    try {
+        Fornecedor::where('id', $request->route('id'))->update($validado);        
+    } catch (\Illuminate\Database\QueryException $exception) {
+        $errorInfo = $exception->errorInfo;
+
+        die($errorInfo);
+    }
 
   }
 
-    //*********************************************************************************
-    //*********************************************************************************
-    public function update(Request $request)
-    {
-      $validado = $request->validate($this->camposGravar, $this->erros);
-      Fornecedor::where('id', $request->route('id'))->update($validado);        
-    }
-
 
   // *************************************************************************************************************
   // *************************************************************************************************************
-  public function excluir(Request $request) {
+  public function delete(Request $request) {
 
-      Fornecedor::where('id', $request->route('id'))->delete();
+      DB::statement('UPDATE fornecedores SET deleted_at = now() WHERE id = '.$request->route('id'));
       return 'Fornecedor excluído com sucesso.';
   }
 
@@ -110,7 +122,7 @@ class FornecedorController extends Controller
   public function status(Request $request) {
 
       // inverte situacao
-      DB::statement('UPDATE fornecedores SET ativo = ! ifnull(ativo, 0) WHERE id = '.$request->route('id'));
+      DB::statement('UPDATE fornecedores SET active = ! ifnull(active, 0) WHERE id = '.$request->route('id'));
       return 'Status alterado com sucesso.';
   }
 

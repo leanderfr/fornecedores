@@ -83,9 +83,9 @@ class UsuarioController extends Controller
 
   // *************************************************************************************************************
   // *************************************************************************************************************
-  public function excluir(Request $request) {
+  public function delete(Request $request) {
 
-      Usuario::where('id', $request->route('id'))->delete();
+      DB::statement('UPDATE usuarios SET deleted_at = now() WHERE id = '.$request->route('id'));
       return 'Usuário excluído com sucesso.';
   }
 
@@ -94,7 +94,7 @@ class UsuarioController extends Controller
   public function status(Request $request) {
 
       // inverte situacao
-      DB::statement('UPDATE usuarios SET ativo = ! ifnull(ativo, 0) WHERE id = '.$request->route('id'));
+      DB::statement('UPDATE usuarios SET active = ! ifnull(active, 0) WHERE id = '.$request->route('id'));
       return 'Status alterado com sucesso.';
   }
 
