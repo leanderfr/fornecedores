@@ -237,7 +237,7 @@ async function salvarFornecedor()  {
   let cmpFocar = ''
   let erroExibir = ''
 
-  var formData = new FormData();  // body do request
+  let formData = {}  //  JSON
 
   // percorre campos para crítica dos dados digitados
   $("input[type='text']").each(function() {
@@ -259,7 +259,9 @@ async function salvarFornecedor()  {
       return false
     }
     // vai montando body do request
-    formData.append(cmpJSON, vlr)    
+    formData[cmpJSON]=vlr;
+
+
   });
 
   if (erroExibir!='') {
@@ -284,14 +286,17 @@ async function salvarFornecedor()  {
   
   // insere ou edita reg
   await fetch(`${props.backendUrl}/${route}`, 
-            {method: props.formHttpMethodApply, 
-            body: formData,
-            "Accept": "application/json",
-              })
-
+      {
+        method: props.formHttpMethodApply, 
+        body: JSON.stringify(formData),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
   .then(response => {
     if (!response.ok) {
-      return response.text().then(text => {throw new Error(`HTTP error! <strong>${response.status}` + text + '</strong>')})
+      return response.json().then(json => {throw new Error(`Código: <strong>${response.status}` + '&nbsp;&nbsp;&nbsp;&nbsp;Erro: '+ json.message + '</strong>')})
     }
     return response.text()
   })

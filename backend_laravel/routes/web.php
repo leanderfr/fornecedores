@@ -4,45 +4,42 @@ use App\Http\Resources\FornecedorResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\UsuarioController;
 
 // habilita front end de URL diferente consultar o backend atual (CORS)
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: *');
 header('Access-Control-Allow-Headers: *');
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+//********************************************************************************************
+//********************************************************************************************
+// status= active / inactive
+Route::get('/fornecedores/{status}/{searchbox}', [FornecedorController::class, 'lista']);
+Route::get('/fornecedores/{status}', [FornecedorController::class, 'lista']);
 
+Route::get('/fornecedor/{id}', [FornecedorController::class, 'getById']);
 
-//Route::get('fornecedores', FornecedorController::class)->except(
-//  ['create', 'show', 'edit']
-//);
+Route::patch('/fornecedor/{id}', [FornecedorController::class, 'update']);
+Route::patch('/fornecedor/status/{id}', [FornecedorController::class, 'status']);
 
-// daria pra definir melhor as rotas abaixo se eu tivesse tempo
+Route::post('/fornecedor/{id}', [FornecedorController::class, 'post']);
 
-Route::get('fornecedores', 'App\Http\Controllers\FornecedorController@index');
-Route::get('fornecedores/{status}/{searchbox}', 'App\Http\Controllers\FornecedorController@index');
-Route::get('fornecedores/{status}', 'App\Http\Controllers\FornecedorController@index');
-Route::get('fornecedor/{id}', 'App\Http\Controllers\FornecedorController@getById');
+Route::delete('/fornecedor/{id}', [FornecedorController::class, 'delete']);
 
-// a edicao de registro nao ta dando certo por causa da falta do 'csrf_token()'
-// o laravel retorna erro 419 , é necessario passar o token a cada gravacao, mas nao consigo gerar sem ter que usar o blade
-// quem gera csrf_token() é o blade, e nao estou usando 
+//********************************************************************************************
+//********************************************************************************************
+Route::get('/usuarios/{status}/{searchbox}', [UsuarioController::class, 'lista']);
+Route::get('/usuarios/{status}', [UsuarioController::class, 'lista']);
 
-// ja desativei a verificacao de CSRF no middleware mas o erro muda pra codigo HTTP 302, not found
-// nao tenho mais tempo, tem solucao mas preciso sair infelizmente!!
+Route::get('/usuarios/{id}', [UsuarioController::class, 'getById']);
 
-Route::patch('fornecedor/{id}', 'App\Http\Controllers\FornecedorController@update');
-//***************************************************************************************************
+Route::patch('/usuarios/{id}', [UsuarioController::class, 'update']);
+Route::patch('/usuarios/status/{id}', [UsuarioController::class, 'status']);
 
-Route::get('usuarios', 'App\Http\Controllers\UsuarioController@index');
-Route::get('usuarios/{status}/{searchbox}', 'App\Http\Controllers\UsuarioController@index');
-Route::get('usuarios/{status}', 'App\Http\Controllers\UsuarioController@index');
-Route::get('usuario/{id}', 'App\Http\Controllers\UsuarioController@getById');
+Route::post('/usuarios/{id}', [UsuarioController::class, 'post']);
 
+Route::delete('/usuarios/{id}', [UsuarioController::class, 'delete']);
 
-//$router->Get("/fornecedores/{status}/{searchbox}", function($status, $searchbox) use($handlerFornecedores) {  
 
 
 
