@@ -9,13 +9,11 @@ Quando se faz a clonagem do projeto localmente, ao abrir o vscode na pasta raiz,
 <br><br>
 Infelizmente essa madrugada, 10/06/25, a AWS derrubou minha instância na EC2 e com ela, a aplicação dockerizada de fornecedores por falta de pagamento.<br><br>
 Sobrou um video comprovando que a aplicação existiu por alguns dias:  
-
-<br><br>
+<br>
 <a href="https://www.youtube.com/watch?v=L500SQACb8k" target="_blank">
     <span style='font-size:20px'>https://www.youtube.com/watch?v=L500SQACb8k</span>
 </a>
-<br><br><br>
-
+<br><br>
 Eu tentei emergencialmente colocar o front Vue e as 2 stacks backend em um site temporario, mas tenho todo tipo de problema, a começar pela versão do PHP, não tenho acesso a atualizar:
 <br><br>
 <a href="http://amegsistema.com.br/temp1/" target="_blank">
