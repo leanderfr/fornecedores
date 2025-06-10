@@ -4,6 +4,9 @@ Ao invés de construir somente o backend em laravel, proposto pelo teste, eu con
 
 Quando se faz a clonagem do projeto localmente, ao abrir o vscode na pasta raiz, é possível acessar o cód fonte das 3 divisões.
 
+![image](https://github.com/user-attachments/assets/a343fd55-3dec-4c2b-9778-0eb71900bf07)
+
+<br><br>
 Infelizmente essa madrugada, 10/06/25, a AWS derrubou minha instância na EC2 e com ela, a aplicação dockerizada de fornecedores por falta de pagamento.<br><br>
 Sobrou um video comprovando que a aplicação existiu por alguns dias:  
 
